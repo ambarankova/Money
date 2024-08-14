@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		CD7006632C6BDD8F00EAE0CD /* ExpensesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7006622C6BDD8F00EAE0CD /* ExpensesPageViewController.swift */; };
-		CD7006652C6BDE7200EAE0CD /* ExpensesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7006642C6BDE7200EAE0CD /* ExpensesTableViewController.swift */; };
 		CDD283882C6CF07500BA95F6 /* ExpensesObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD283872C6CF07500BA95F6 /* ExpensesObject.swift */; };
 		CDD2838B2C6CF10100BA95F6 /* IncomeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD2838A2C6CF10100BA95F6 /* IncomeObject.swift */; };
+		CDD2838E2C6D049200BA95F6 /* ExpensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD2838D2C6D049200BA95F6 /* ExpensesViewModel.swift */; };
+		CDD283912C6D075300BA95F6 /* ExpensesTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD283902C6D075300BA95F6 /* ExpensesTableViewCellViewModel.swift */; };
 		CDE031B72C6BA08B0026677F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE031B62C6BA08B0026677F /* AppDelegate.swift */; };
 		CDE031BB2C6BA08B0026677F /* ExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE031BA2C6BA08B0026677F /* ExpensesViewController.swift */; };
 		CDE031C02C6BA08C0026677F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDE031BF2C6BA08C0026677F /* Assets.xcassets */; };
@@ -25,9 +26,10 @@
 
 /* Begin PBXFileReference section */
 		CD7006622C6BDD8F00EAE0CD /* ExpensesPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesPageViewController.swift; sourceTree = "<group>"; };
-		CD7006642C6BDE7200EAE0CD /* ExpensesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesTableViewController.swift; sourceTree = "<group>"; };
 		CDD283872C6CF07500BA95F6 /* ExpensesObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesObject.swift; sourceTree = "<group>"; };
 		CDD2838A2C6CF10100BA95F6 /* IncomeObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeObject.swift; sourceTree = "<group>"; };
+		CDD2838D2C6D049200BA95F6 /* ExpensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewModel.swift; sourceTree = "<group>"; };
+		CDD283902C6D075300BA95F6 /* ExpensesTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		CDE031B32C6BA08B0026677F /* Money.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Money.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE031B62C6BA08B0026677F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDE031BA2C6BA08B0026677F /* ExpensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewController.swift; sourceTree = "<group>"; };
@@ -64,10 +66,8 @@
 		CDD283842C6CEF2D00BA95F6 /* Expenses */ = {
 			isa = PBXGroup;
 			children = (
-				CDE031BA2C6BA08B0026677F /* ExpensesViewController.swift */,
-				CD7006642C6BDE7200EAE0CD /* ExpensesTableViewController.swift */,
-				CD7006622C6BDD8F00EAE0CD /* ExpensesPageViewController.swift */,
-				CDE031D82C6BAE950026677F /* ExpensesTableViewCell.swift */,
+				CDD2838C2C6D047F00BA95F6 /* View */,
+				CDD2838F2C6D05BC00BA95F6 /* ViewModel */,
 			);
 			path = Expenses;
 			sourceTree = "<group>";
@@ -95,6 +95,25 @@
 				CDD2838A2C6CF10100BA95F6 /* IncomeObject.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		CDD2838C2C6D047F00BA95F6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CD7006622C6BDD8F00EAE0CD /* ExpensesPageViewController.swift */,
+				CDE031BA2C6BA08B0026677F /* ExpensesViewController.swift */,
+				CDE031D82C6BAE950026677F /* ExpensesTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CDD2838F2C6D05BC00BA95F6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CDD2838D2C6D049200BA95F6 /* ExpensesViewModel.swift */,
+				CDD283902C6D075300BA95F6 /* ExpensesTableViewCellViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		CDE031AA2C6BA08B0026677F = {
@@ -207,7 +226,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDE031CB2C6BA1420026677F /* TabBarController.swift in Sources */,
-				CD7006652C6BDE7200EAE0CD /* ExpensesTableViewController.swift in Sources */,
+				CDD283912C6D075300BA95F6 /* ExpensesTableViewCellViewModel.swift in Sources */,
+				CDD2838E2C6D049200BA95F6 /* ExpensesViewModel.swift in Sources */,
 				CDE031CF2C6BA2750026677F /* IncomeViewController.swift in Sources */,
 				CDD2838B2C6CF10100BA95F6 /* IncomeObject.swift in Sources */,
 				CDE031D12C6BA2A90026677F /* AnalysisViewController.swift in Sources */,

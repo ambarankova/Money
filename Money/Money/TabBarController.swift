@@ -23,7 +23,7 @@ final class TabBarController: UITabBarController {
             setupNavigationController(rootViewController: ChatViewController(),
                                       title: "Chat",
                                       image: UIImage(systemName: "message") ?? UIImage.add),
-            setupNavigationController(rootViewController: ExpensesViewController(),
+            setupNavigationController(rootViewController: ExpensesPageViewController(),
                                       title: "Expenses",
                                       image: UIImage(systemName: "arrow.down.circle") ?? UIImage.add),
             setupNavigationController(rootViewController: IncomeViewController(),

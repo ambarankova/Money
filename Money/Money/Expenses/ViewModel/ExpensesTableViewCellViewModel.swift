@@ -1,0 +1,21 @@
+//
+//  ExpensesTableViewCellViewModel.swift
+//  Money
+//
+//  Created by Анастасия Ахановская on 14.08.2024.
+//
+
+import Foundation
+
+final class ExpensesTableViewCellViewModel {
+    
+    let name: String
+    let plan: Int
+    let fact: Int
+    
+    init(expense: ExpensesObject) {
+        name = expense.name
+        plan = expense.plan
+        fact = expense.fact
+    }
+}
