@@ -9,17 +9,15 @@ import UIKit
 import SnapKit
 
 final class ExpensesTableViewCell: UITableViewCell {
-    
+
     // MARK: - GUI Variables
-    
+
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
-        
         view.axis = .horizontal
         view.distribution = .fillEqually
         view.alignment = .center
         view.spacing = 5
-        
         return view
     }()
     
@@ -41,46 +39,48 @@ final class ExpensesTableViewCell: UITableViewCell {
         
         setupUI()
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - Methods
     func configure(with expense: ExpensesObject) {
-        categoryLabel.text = expense.name
-        if let plan = expense.plan {
-            planLabel.text = String(plan)
-        } else {
-            planLabel.text = "Plan"
-        }
-        
-        if let fact = expense.fact {
-            factLabel.text = String(fact)
-        } else {
-            factLabel.text = "Fact"
-        }
+        categoryLabel.text = expense.category
+
+        let defaultPlanText = "PlanD"
+        let defaultFactText = "FactD"
+
+        // Проверим значения что они не nil.
+        // map преобразует в строку, если значение не nil. Иначе поставим значение по умолчанию
+        planLabel.text = expense.plan.map(String.init) ?? defaultPlanText
+        factLabel.text = expense.fact.map(String.init) ?? defaultFactText
     }
-    
-    // MARK: - Private Methods
-    private func setupUI() {
+}
+
+// MARK: - Private Methods
+
+private extension ExpensesTableViewCell {
+
+    func setupUI() {
         addSubview(stackView)
         [categoryLabel, planLabel, factLabel].forEach { stackView.addArrangedSubview($0) }
         setupConstraints()
     }
-    
-    private func setupConstraints() {
+
+    func setupConstraints() {
         stackView.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().offset(8)
             make.bottom.trailing.equalToSuperview().offset(-8)
         }
     }
-    
-    private func createLabel(font: UIFont,
-                             aligment: NSTextAlignment? = nil,
-                             color: UIColor? = nil,
-                             text: String,
-                             background: UIColor? = nil) -> UILabel {
+
+    func createLabel(font: UIFont?,
+                     aligment: NSTextAlignment? = nil,
+                     color: UIColor? = nil,
+                     text: String,
+                     background: UIColor? = nil) -> UILabel {
         let label = UILabel()
         label.text = text
         label.font = font

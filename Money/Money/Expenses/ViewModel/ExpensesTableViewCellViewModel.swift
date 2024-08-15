@@ -13,7 +13,7 @@ final class ExpensesTableViewCellViewModel {
     let fact: Int
     
     init(expense: ExpensesObject) {
-        name = expense.name
+        name = expense.category
         plan = expense.plan ?? 0
         fact = expense.fact ?? 0
     }

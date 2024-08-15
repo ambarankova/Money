@@ -40,12 +40,12 @@ final class ExpensesViewModel: ExpensesViewModelProtocol {
         }
         
         let section: [TableViewSection] = [TableViewSection(items:
-                                                                [ExpensesObject(name: "Category",
+                                                                [ExpensesObject(category: "Category",
                                                                                 plan: nil,
                                                                                 fact: nil)]),
                                            centralSection,
                                            TableViewSection(items:
-                                                                [ExpensesObject(name: "Total",
+                                                                [ExpensesObject(category: "Total",
                                                                                 plan: totalPlan,
                                                                                 fact: totalFact)])]
         self.sections = section
@@ -53,10 +53,10 @@ final class ExpensesViewModel: ExpensesViewModelProtocol {
     
     private func setMocks() {
         centralSection = TableViewSection(items:
-                                                [ExpensesObject(name: "Transport",
+                                            [ExpensesObject(category: "Transport",
                                                                 plan: 2000,
                                                                 fact: 0),
-                                                 ExpensesObject(name: "Beauty",
+                                             ExpensesObject(category: "Beauty",
                                                                 plan: 5000,
                                                                 fact: 1000)])
     }
