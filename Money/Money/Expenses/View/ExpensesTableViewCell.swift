@@ -32,6 +32,7 @@ final class ExpensesTableViewCell: UITableViewCell {
                                              text: "20")
     
     // MARK: - Properties
+    static let reuseID = "ExpensesTableViewCell"
     private let textSize: CGFloat = 17
     
     // MARK: - Initializations
@@ -46,7 +47,7 @@ final class ExpensesTableViewCell: UITableViewCell {
     }
     
     // MARK: - Methods
-    func set(expense: ExpensesObject) {
+    func configure(with expense: ExpensesObject) {
         categoryLabel.text = expense.name
         if let plan = expense.plan {
             planLabel.text = String(plan)
