@@ -23,6 +23,7 @@
 		CDE031D12C6BA2A90026677F /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE031D02C6BA2A90026677F /* AnalysisViewController.swift */; };
 		CDE031D72C6BA9410026677F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CDE031D62C6BA9410026677F /* SnapKit */; };
 		CDE031D92C6BAE950026677F /* ExpensesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE031D82C6BAE950026677F /* ExpensesTableViewCell.swift */; };
+		FA8567D42C6EAC9A00C7A965 /* AddExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8567D32C6EAC9A00C7A965 /* AddExpensesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		CDE031CE2C6BA2750026677F /* IncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeViewController.swift; sourceTree = "<group>"; };
 		CDE031D02C6BA2A90026677F /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
 		CDE031D82C6BAE950026677F /* ExpensesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesTableViewCell.swift; sourceTree = "<group>"; };
+		FA8567D32C6EAC9A00C7A965 /* AddExpensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpensesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				CD7006622C6BDD8F00EAE0CD /* ExpensesPageViewController.swift */,
 				CDE031BA2C6BA08B0026677F /* ExpensesViewController.swift */,
 				CDE031D82C6BAE950026677F /* ExpensesTableViewCell.swift */,
+				FA8567D32C6EAC9A00C7A965 /* AddExpensesViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				CDE031CB2C6BA1420026677F /* TabBarController.swift in Sources */,
 				CDD283912C6D075300BA95F6 /* ExpensesTableViewCellViewModel.swift in Sources */,
 				CDA019522C6E3399002ACF11 /* TableViewSection.swift in Sources */,
+				FA8567D42C6EAC9A00C7A965 /* AddExpensesViewController.swift in Sources */,
 				CDD2838E2C6D049200BA95F6 /* ExpensesViewModel.swift in Sources */,
 				CDE031CF2C6BA2750026677F /* IncomeViewController.swift in Sources */,
 				CDD2838B2C6CF10100BA95F6 /* IncomeObject.swift in Sources */,

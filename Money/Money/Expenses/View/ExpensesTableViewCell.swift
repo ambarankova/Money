@@ -49,8 +49,8 @@ final class ExpensesTableViewCell: UITableViewCell {
     func configure(with expense: ExpensesObject) {
         categoryLabel.text = expense.category
 
-        let defaultPlanText = "PlanD"
-        let defaultFactText = "FactD"
+        let defaultPlanText = "Plan"
+        let defaultFactText = "Fact"
 
         // Проверим значения что они не nil.
         // map преобразует в строку, если значение не nil. Иначе поставим значение по умолчанию
@@ -64,7 +64,8 @@ final class ExpensesTableViewCell: UITableViewCell {
 private extension ExpensesTableViewCell {
 
     func setupUI() {
-        addSubview(stackView)
+        // добавляем элементы в contentView ячейки, иначе они будут добавлены поверх нее
+        contentView.addSubview(stackView)
         [categoryLabel, planLabel, factLabel].forEach { stackView.addArrangedSubview($0) }
         setupConstraints()
     }

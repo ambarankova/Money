@@ -39,6 +39,7 @@ final class ExpensesViewController: UIViewController {
         button.backgroundColor = .lightGray
         button.titleLabel?.textAlignment = .center
         button.layer.cornerRadius = CGFloat(Constants.Sizes.buttonHeight / 2)
+        button.addTarget(nil, action: #selector(addButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -71,6 +72,13 @@ final class ExpensesViewController: UIViewController {
 // MARK: - Private
 
 private extension ExpensesViewController {
+
+    @objc 
+    func addButtonTapped() {
+        let addExpenseVC = AddExpensesViewController()
+        addExpenseVC.delegate = self
+        present(addExpenseVC, animated: true, completion: nil)
+    }
 
     private func setupTableView() {
         table.register(ExpensesTableViewCell.self, forCellReuseIdentifier: ExpensesTableViewCell.reuseID)
@@ -135,12 +143,24 @@ extension ExpensesViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ExpensesTableViewCell.reuseID,
-                                                       for: indexPath) as? ExpensesTableViewCell,
-              let expense = viewModel?.sections[indexPath.section].items[indexPath.row] as? ExpensesObject
-        else { return UITableViewCell() }
-        
-        cell.configure(with: expense)
+                                                       for: indexPath) as? ExpensesTableViewCell else {
+            return UITableViewCell()
+        }
+        if let expense = viewModel?.sections[indexPath.section].items[indexPath.row] as? ExpensesObject {
+            cell.configure(with: expense)
+        }
         return cell
+    }
+}
+
+// MARK: - AddExpensesViewControllerDelegate
+// Передадим данные через делегат контроллера
+
+extension ExpensesViewController: AddExpensesViewControllerDelegate {
+    
+    func didAddExpense(_ expense: ExpensesObject) {
+        viewModel?.addExpenses(expense)
+        // передаем во вью модель данные
     }
 }
 
