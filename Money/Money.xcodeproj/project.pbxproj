@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CD7006632C6BDD8F00EAE0CD /* ExpensesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7006622C6BDD8F00EAE0CD /* ExpensesPageViewController.swift */; };
+		CDA019522C6E3399002ACF11 /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA019512C6E3399002ACF11 /* TableViewSection.swift */; };
 		CDD283882C6CF07500BA95F6 /* ExpensesObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD283872C6CF07500BA95F6 /* ExpensesObject.swift */; };
 		CDD2838B2C6CF10100BA95F6 /* IncomeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD2838A2C6CF10100BA95F6 /* IncomeObject.swift */; };
 		CDD2838E2C6D049200BA95F6 /* ExpensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD2838D2C6D049200BA95F6 /* ExpensesViewModel.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		CD7006622C6BDD8F00EAE0CD /* ExpensesPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesPageViewController.swift; sourceTree = "<group>"; };
+		CDA019512C6E3399002ACF11 /* TableViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSection.swift; sourceTree = "<group>"; };
 		CDD283872C6CF07500BA95F6 /* ExpensesObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesObject.swift; sourceTree = "<group>"; };
 		CDD2838A2C6CF10100BA95F6 /* IncomeObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeObject.swift; sourceTree = "<group>"; };
 		CDD2838D2C6D049200BA95F6 /* ExpensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewModel.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			children = (
 				CDE031B62C6BA08B0026677F /* AppDelegate.swift */,
 				CDE031CA2C6BA1420026677F /* TabBarController.swift */,
+				CDA019512C6E3399002ACF11 /* TableViewSection.swift */,
 				CDD283892C6CF07D00BA95F6 /* Model */,
 				CDD283832C6CEF2300BA95F6 /* Chat */,
 				CDD283842C6CEF2D00BA95F6 /* Expenses */,
@@ -227,6 +230,7 @@
 			files = (
 				CDE031CB2C6BA1420026677F /* TabBarController.swift in Sources */,
 				CDD283912C6D075300BA95F6 /* ExpensesTableViewCellViewModel.swift in Sources */,
+				CDA019522C6E3399002ACF11 /* TableViewSection.swift in Sources */,
 				CDD2838E2C6D049200BA95F6 /* ExpensesViewModel.swift in Sources */,
 				CDE031CF2C6BA2750026677F /* IncomeViewController.swift in Sources */,
 				CDD2838B2C6CF10100BA95F6 /* IncomeObject.swift in Sources */,

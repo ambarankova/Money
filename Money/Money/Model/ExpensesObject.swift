@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct ExpensesObject {
+struct ExpensesObject: TableViewSectionProtocol {
     let name: String
-    let plan: Int
-    let fact: Int
+    let plan: Int?
+    let fact: Int?
 }

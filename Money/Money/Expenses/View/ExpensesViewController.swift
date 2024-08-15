@@ -50,7 +50,7 @@ class ExpensesViewController: UIViewController, UITableViewDelegate, UITableView
     }()
     
     // MARK: - Properties
-    private var viewModel: ExpensesViewModelProtocol
+    private var viewModel: ExpensesViewModelProtocol?
     private let buttonHeight = 70
     
     // MARK: - Life Cycle
@@ -80,7 +80,8 @@ class ExpensesViewController: UIViewController, UITableViewDelegate, UITableView
         table.register(ExpensesTableViewCell.self, forCellReuseIdentifier: "ExpensesTableViewCell")
         table.dataSource = self
         table.delegate = self
-        table.frame = view.bounds
+//        table.frame = view.bounds
+//        table.separatorStyle = .none
     }
     
     private func setupUI() {
@@ -115,17 +116,21 @@ class ExpensesViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     // MARK: - UITableViewDataSourse
+    func numberOfSections(in tableView: UITableView) -> Int {
+        viewModel?.sections.count ?? 0
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        viewModel?.sections[section].items.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExpensesTableViewCell",
-                                                       for: indexPath) as? ExpensesTableViewCell
-                //        , let expense =
+                                                       for: indexPath) as? ExpensesTableViewCell,
+              let expense = viewModel?.sections[indexPath.section].items[indexPath.row] as? ExpensesObject
         else { return UITableViewCell() }
         
-        //        cell?.set(expense: <#T##ExpensesTableViewCellViewModel#>)
+        cell.set(expense: expense)
         return cell
     }
     

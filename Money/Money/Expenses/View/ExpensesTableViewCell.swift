@@ -23,12 +23,16 @@ final class ExpensesTableViewCell: UITableViewCell {
         return view
     }()
     
+    private lazy var categoryLabel = createLabel(font: .boldSystemFont(ofSize: textSize),
+                                                 aligment: .left,
+                                                 text: "Food")
+    private lazy var planLabel = createLabel(font: .systemFont(ofSize: textSize),
+                                             text: "100")
+    private lazy var factLabel = createLabel(font: .systemFont(ofSize: textSize),
+                                             text: "20")
+    
     // MARK: - Properties
     private let textSize: CGFloat = 17
-    
-    private lazy var categoryLabel = createLabel(font: .boldSystemFont(ofSize: textSize),aligment: .left, text: "Food")
-    private lazy var planLabel = createLabel(font: .systemFont(ofSize: textSize), text: "100")
-    private lazy var factLabel = createLabel(font: .systemFont(ofSize: textSize), text: "20")
     
     // MARK: - Initializations
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -42,10 +46,19 @@ final class ExpensesTableViewCell: UITableViewCell {
     }
     
     // MARK: - Methods
-    func set(expense: ExpensesTableViewCellViewModel) {
-        categoryLabel = createLabel(font: .boldSystemFont(ofSize: 15),aligment: .left, text: expense.name)
-        planLabel = createLabel(font: .systemFont(ofSize: 15), text: String(expense.plan))
-        factLabel = createLabel(font: .systemFont(ofSize: 15), text: String(expense.fact))
+    func set(expense: ExpensesObject) {
+        categoryLabel.text = expense.name
+        if let plan = expense.plan {
+            planLabel.text = String(plan)
+        } else {
+            planLabel.text = "Plan"
+        }
+        
+        if let fact = expense.fact {
+            factLabel.text = String(fact)
+        } else {
+            factLabel.text = "Fact"
+        }
     }
     
     // MARK: - Private Methods
@@ -65,7 +78,8 @@ final class ExpensesTableViewCell: UITableViewCell {
     private func createLabel(font: UIFont,
                              aligment: NSTextAlignment? = nil,
                              color: UIColor? = nil,
-                             text: String) -> UILabel {
+                             text: String,
+                             background: UIColor? = nil) -> UILabel {
         let label = UILabel()
         label.text = text
         label.font = font
