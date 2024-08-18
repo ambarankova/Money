@@ -9,6 +9,7 @@ import UIKit
 
 protocol ExpensesViewModelProtocol {
     var sections: [TableViewSection] { get }
+    func addExpenses(_ expenses: ExpensesObject)
 }
 
 final class ExpensesViewModel: ExpensesViewModelProtocol {
@@ -16,48 +17,42 @@ final class ExpensesViewModel: ExpensesViewModelProtocol {
     private var centralSection = TableViewSection(title: nil, items: [])
     
     init() {
-//        setMocks()
-        getExpense()
-        setupTable()
+        setMocks()
+//        getExpense()
+        initialSetupTable()
     }
     
     private func getExpense() {
-        
+
     }
     
-    private func setupTable() {
-        var totalPlan = 0
-        var totalFact = 0
-        
-        centralSection.items.forEach {
-            guard let plan = $0.plan else { return }
-            totalPlan += plan
+    private func initialSetupTable() {
+        let totals = centralSection.items.reduce(into: (plan: 0, fact: 0)) { result, item in
+            if let plan = item.plan {
+                result.plan += plan
+            }
+            if let fact = item.fact {
+                result.fact += fact
+            }
         }
-        
-        centralSection.items.forEach {
-            guard let fact = $0.fact else { return }
-            totalFact += fact
-        }
-        
-        let section: [TableViewSection] = [TableViewSection(items:
-                                                                [ExpensesObject(name: "Category",
-                                                                                plan: nil,
-                                                                                fact: nil)]),
-                                           centralSection,
-                                           TableViewSection(items:
-                                                                [ExpensesObject(name: "Total",
-                                                                                plan: totalPlan,
-                                                                                fact: totalFact)])]
-        self.sections = section
+        sections = [
+            TableViewSection(items: [ExpensesObject(category: "Category", plan: nil, fact: nil)]),
+            centralSection,
+            TableViewSection(items: [ExpensesObject(category: "Total", plan: totals.plan, fact: totals.fact)])
+        ]
     }
-    
+
     private func setMocks() {
         centralSection = TableViewSection(items:
-                                                [ExpensesObject(name: "Transport",
+                                            [ExpensesObject(category: "Transport",
                                                                 plan: 2000,
                                                                 fact: 0),
-                                                 ExpensesObject(name: "Beauty",
+                                             ExpensesObject(category: "Beauty",
                                                                 plan: 5000,
                                                                 fact: 1000)])
+    }
+    
+    func addExpenses(_ expenses: ExpensesObject) {
+        // обработай полученые данные из expenses и верни их в контроллер
     }
 }

@@ -8,52 +8,40 @@
 import UIKit
 import SnapKit
 
-class ExpensesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+final class ExpensesViewController: UIViewController {
     
     // MARK: - GUI Variables
-    private lazy var countLabel: UILabel = {
+    private let table = UITableView()
+    
+    private let countLabel: UILabel = {
         let label = UILabel()
-        
-        label.text = "Count"
+        label.text = Constants.Texts.countLabelText
         label.font = .boldSystemFont(ofSize: 40)
         label.textAlignment = .center
-        
         return label
     }()
     
-    private lazy var monthLabel: UILabel = {
+    private let monthLabel: UILabel = {
         let label = UILabel()
-        
-        label.text = "was saved in this month"
+        label.text = Constants.Texts.monthLabelText
         label.font = .systemFont(ofSize: 20)
         label.textAlignment = .center
-        
         return label
     }()
     
-    private lazy var plusButton: UIButton = {
+    private let plusButton: UIButton = {
         let button = UIButton()
-        
-        button.setTitle("+", for: .normal)
+        button.setTitle(Constants.Texts.buttonTitle, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 40)
         button.backgroundColor = .lightGray
-        button.layer.cornerRadius = CGFloat(buttonHeight / 2)
-        button.addTarget(self,
-                         action: #selector(goToTransactionViewController),
-                         for: .touchUpInside)
-        
+        button.titleLabel?.textAlignment = .center
+        button.layer.cornerRadius = CGFloat(Constants.Sizes.buttonHeight / 2)
+        button.addTarget(nil, action: #selector(addButtonTapped), for: .touchUpInside)
         return button
-    }()
-    
-    private lazy var table: UITableView = {
-        let table = UITableView()
-        
-        return table
     }()
     
     // MARK: - Properties
     private var viewModel: ExpensesViewModelProtocol?
-    private let buttonHeight = 70
     
     // MARK: - Life Cycle
     init(viewModel: ExpensesViewModelProtocol) {
@@ -75,24 +63,34 @@ class ExpensesViewController: UIViewController, UITableViewDelegate, UITableView
         setupUI()
     }
     
-    // MARK: - Private Methods
     private func setupViewModel() { }
+}
+
+// MARK: - Private
+
+private extension ExpensesViewController {
     
-    private func setupTableView() {
-        table.register(ExpensesTableViewCell.self, forCellReuseIdentifier: "ExpensesTableViewCell")
-        table.dataSource = self
-        table.delegate = self
-//        table.separatorStyle = .none
+    @objc
+    func addButtonTapped() {
+        let addExpenseVC = AddExpensesViewController()
+        addExpenseVC.delegate = self
+        present(addExpenseVC, animated: true, completion: nil)
     }
     
-    private func setupUI() {
+    private func setupTableView() {
+        table.register(ExpensesTableViewCell.self, forCellReuseIdentifier: ExpensesTableViewCell.reuseID)
+        table.dataSource = self
+        table.delegate = self
+    }
+    
+    func setupUI() {
         [countLabel, monthLabel, table, plusButton].forEach { view.addSubview($0) }
         view.backgroundColor = .white
         
         setupConstraints()
     }
     
-    private func setupConstraints() {
+    func setupConstraints() {
         countLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).inset(70)
             make.leading.trailing.equalToSuperview()
@@ -110,38 +108,64 @@ class ExpensesViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         plusButton.snp.makeConstraints { make in
-            make.width.height.equalTo(buttonHeight)
+            make.width.height.equalTo(Constants.Sizes.buttonHeight)
             make.trailing.equalToSuperview().inset(40)
             make.top.equalTo(table.snp.bottom).offset(20)
         }
     }
-    
-    @objc private func goToTransactionViewController() {
-//        navigationController?.pushViewController(ExpTransactionViewController(), animated: true)
-        present(ExpTransactionViewController(viewModel: ExpTransactionViewModel()), animated: true)
+}
+
+// MARK: - UITableViewDelegate
+extension ExpensesViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
     }
-    
-    // MARK: - UITableViewDataSourse
+}
+
+// MARK: - UITableViewDataSourse
+extension ExpensesViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         viewModel?.sections.count ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel?.sections[section].items.count ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExpensesTableViewCell",
-                                                       for: indexPath) as? ExpensesTableViewCell,
-              let expense = viewModel?.sections[indexPath.section].items[indexPath.row] as? ExpensesObject
-        else { return UITableViewCell() }
-        
-        cell.set(expense: expense)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ExpensesTableViewCell.reuseID,
+                                                       for: indexPath) as? ExpensesTableViewCell else {
+            return UITableViewCell()
+        }
+        if let expense = viewModel?.sections[indexPath.section].items[indexPath.row] as? ExpensesObject {
+            cell.configure(with: expense)
+        }
         return cell
     }
+}
+
+// MARK: - AddExpensesViewControllerDelegate
+// Передадим данные через делегат контроллера
+
+extension ExpensesViewController: AddExpensesViewControllerDelegate {
     
-    // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+    func didAddExpense(_ expense: ExpensesObject) {
+        viewModel?.addExpenses(expense)
+        // передаем во вью модель данные
+    }
+}
+
+// MARK: - UI constants
+private extension ExpensesViewController {
+
+    enum Constants {
+        enum Texts {
+            static let countLabelText = "Count"
+            static let monthLabelText = "was saved in this month"
+            static let buttonTitle = "+"
+        }
+        enum Sizes {
+            static let buttonHeight: CGFloat = 70.0
+        }
     }
 }

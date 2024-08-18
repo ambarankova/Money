@@ -8,6 +8,10 @@
 import Foundation
 
 final class ExpTransactionViewModel: ExpensesViewModelProtocol {
+    func addExpenses(_ expenses: ExpensesObject) {
+        print(expenses)
+    }
+    
     var sections: [TableViewSection] = []
     
     init() {

@@ -8,76 +8,130 @@
 import UIKit
 import SnapKit
 
-final class ExpensesPageViewController: UIPageViewController,
-                                            UIPageViewControllerDelegate,
-                                            UIPageViewControllerDataSource {
-    
+final class ExpensesPageViewController: UIPageViewController {
+
+    // MARK: - UI elements
+    private let pageControl = UIPageControl(frame: CGRect())
+
     // MARK: - Properties
-    var pageViewController = UIPageViewController()
-    var pageControl = UIPageControl(frame: CGRect())
-    let pages: [UIViewController] = [
+private let pages = [
         ExpensesViewController(viewModel: ExpensesViewModel()),
         ExpTransactionViewController(viewModel: ExpTransactionViewModel())
     ]
     
     // MARK: - Life Cycle
+    init() {
+        super.init(transitionStyle: .scroll,
+                   navigationOrientation: .horizontal,
+                   options: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupPageViewController()
+        setupUI()
         setupPageControl()
     }
-    
-    // MARK: - Private Methods
-    private func setupPageViewController() {
-        pageViewController = UIPageViewController(transitionStyle: .scroll,
-                                                  navigationOrientation: .horizontal,
-                                                  options: nil)
-        pageViewController.dataSource = self
-        pageViewController.delegate = self
-        
-        pageViewController.setViewControllers([pages[0]],
-                                              direction: .forward,
-                                              animated: true,
-                                              completion: nil)
-        pageViewController.view.frame = view.bounds
-        view.addSubview(pageViewController.view)
+}
+
+// MARK: - Private
+private extension ExpensesPageViewController {
+    func setupUI() {
+        view.addSubview(pageControl)
+        setupConstraints()
     }
-    
-    private func setupPageControl() {
+
+    func setupPageViewController() {
+        dataSource = self
+        delegate = self
+
+        setViewControllers([pages[0]], direction: .forward, animated: true, completion: nil)
+    }
+
+    func setupPageControl() {
         pageControl.numberOfPages = pages.count
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = .lightGray
         pageControl.currentPageIndicatorTintColor = .black
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(pageControl)
-        
+    }
+
+    func setupConstraints() {
         pageControl.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(5)
             make.centerX.equalToSuperview()
         }
     }
     
-    // MARK: - UIPageViewControllerDataSource
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let index = pages.firstIndex(of: viewController), index > 0 else {
-                    return nil
-                }
-                return pages[index - 1]
-    }
+//    // MARK: - UIPageViewControllerDataSource
+//    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+//        guard let index = pages.firstIndex(of: viewController), index > 0 else {
+//                    return nil
+//                }
+//                return pages[index - 1]
+//    }
+//
+//    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+//        guard let index = pages.firstIndex(of: viewController), index < pages.count - 1 else {
+//                    return nil
+//                }
+//                return pages[index + 1]
+//    }
+//
+//    // MARK: - UIPageViewControllerDelegate
+//    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+//            if let visibleViewController = pageViewController.viewControllers?.first,
+//               let index = pages.firstIndex(of: visibleViewController) {
+//                pageControl.currentPage = index
+//            }
+//        }
+}
+
+// MARK: - UIPageViewControllerDelegate
+
+extension ExpensesPageViewController: UIPageViewControllerDelegate {
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = pages.firstIndex(of: viewController), index < pages.count - 1 else {
-                    return nil
-                }
-                return pages[index + 1]
-    }
-    
-    // MARK: - UIPageViewControllerDelegate
+
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-            if let visibleViewController = pageViewController.viewControllers?.first,
-               let index = pages.firstIndex(of: visibleViewController) {
-                pageControl.currentPage = index
-            }
+        guard
+            let visibleViewController = pageViewController.viewControllers?.first,
+            let expensesViewController = visibleViewController as? ExpensesViewController,
+            let index = pages.firstIndex(of: expensesViewController)
+        else {
+            return
         }
+        pageControl.currentPage = index
+    }
+}
+
+// MARK: - UIPageViewControllerDataSource
+
+extension ExpensesPageViewController: UIPageViewControllerDataSource {
+
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard
+            let expensesViewController = viewController as? ExpensesViewController,
+            let index = pages.firstIndex(of: expensesViewController),
+            index > 0
+        else {
+            return nil
+        }
+        return pages[index - 1]
+    }
+
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard
+            let expensesViewController = viewController as? ExpensesViewController,
+            let index = pages.firstIndex(of: expensesViewController),
+            index < pages.count - 1
+        else {
+            return nil
+        }
+        return pages[index + 1]
+    }
 }
