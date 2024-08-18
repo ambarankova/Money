@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		CD7006632C6BDD8F00EAE0CD /* ExpensesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7006622C6BDD8F00EAE0CD /* ExpensesPageViewController.swift */; };
 		CDA019522C6E3399002ACF11 /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA019512C6E3399002ACF11 /* TableViewSection.swift */; };
+		CDA019542C6E55CD002ACF11 /* ExpTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA019532C6E55CD002ACF11 /* ExpTransactionViewController.swift */; };
+		CDA019562C6E5E06002ACF11 /* ExpTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA019552C6E5E06002ACF11 /* ExpTransactionViewModel.swift */; };
+		CDA0195C2C6E6261002ACF11 /* ExpTransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA0195B2C6E6261002ACF11 /* ExpTransactionTableViewCell.swift */; };
 		CDD283882C6CF07500BA95F6 /* ExpensesObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD283872C6CF07500BA95F6 /* ExpensesObject.swift */; };
 		CDD2838B2C6CF10100BA95F6 /* IncomeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD2838A2C6CF10100BA95F6 /* IncomeObject.swift */; };
 		CDD2838E2C6D049200BA95F6 /* ExpensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD2838D2C6D049200BA95F6 /* ExpensesViewModel.swift */; };
@@ -28,6 +31,9 @@
 /* Begin PBXFileReference section */
 		CD7006622C6BDD8F00EAE0CD /* ExpensesPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesPageViewController.swift; sourceTree = "<group>"; };
 		CDA019512C6E3399002ACF11 /* TableViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSection.swift; sourceTree = "<group>"; };
+		CDA019532C6E55CD002ACF11 /* ExpTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpTransactionViewController.swift; sourceTree = "<group>"; };
+		CDA019552C6E5E06002ACF11 /* ExpTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpTransactionViewModel.swift; sourceTree = "<group>"; };
+		CDA0195B2C6E6261002ACF11 /* ExpTransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpTransactionTableViewCell.swift; sourceTree = "<group>"; };
 		CDD283872C6CF07500BA95F6 /* ExpensesObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesObject.swift; sourceTree = "<group>"; };
 		CDD2838A2C6CF10100BA95F6 /* IncomeObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeObject.swift; sourceTree = "<group>"; };
 		CDD2838D2C6D049200BA95F6 /* ExpensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewModel.swift; sourceTree = "<group>"; };
@@ -57,6 +63,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CDA019572C6E60DE002ACF11 /* Total */ = {
+			isa = PBXGroup;
+			children = (
+				CDD2838C2C6D047F00BA95F6 /* View */,
+				CDD2838F2C6D05BC00BA95F6 /* ViewModel */,
+			);
+			path = Total;
+			sourceTree = "<group>";
+		};
+		CDA019582C6E60FB002ACF11 /* Transactions */ = {
+			isa = PBXGroup;
+			children = (
+				CDA019592C6E6103002ACF11 /* View */,
+				CDA0195A2C6E610D002ACF11 /* ViewModel */,
+			);
+			path = Transactions;
+			sourceTree = "<group>";
+		};
+		CDA019592C6E6103002ACF11 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CDA019532C6E55CD002ACF11 /* ExpTransactionViewController.swift */,
+				CDA0195B2C6E6261002ACF11 /* ExpTransactionTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CDA0195A2C6E610D002ACF11 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CDA019552C6E5E06002ACF11 /* ExpTransactionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		CDD283832C6CEF2300BA95F6 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -68,8 +109,9 @@
 		CDD283842C6CEF2D00BA95F6 /* Expenses */ = {
 			isa = PBXGroup;
 			children = (
-				CDD2838C2C6D047F00BA95F6 /* View */,
-				CDD2838F2C6D05BC00BA95F6 /* ViewModel */,
+				CD7006622C6BDD8F00EAE0CD /* ExpensesPageViewController.swift */,
+				CDA019572C6E60DE002ACF11 /* Total */,
+				CDA019582C6E60FB002ACF11 /* Transactions */,
 			);
 			path = Expenses;
 			sourceTree = "<group>";
@@ -102,7 +144,6 @@
 		CDD2838C2C6D047F00BA95F6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CD7006622C6BDD8F00EAE0CD /* ExpensesPageViewController.swift */,
 				CDE031BA2C6BA08B0026677F /* ExpensesViewController.swift */,
 				CDE031D82C6BAE950026677F /* ExpensesTableViewCell.swift */,
 			);
@@ -234,6 +275,8 @@
 				CDD2838E2C6D049200BA95F6 /* ExpensesViewModel.swift in Sources */,
 				CDE031CF2C6BA2750026677F /* IncomeViewController.swift in Sources */,
 				CDD2838B2C6CF10100BA95F6 /* IncomeObject.swift in Sources */,
+				CDA0195C2C6E6261002ACF11 /* ExpTransactionTableViewCell.swift in Sources */,
+				CDA019562C6E5E06002ACF11 /* ExpTransactionViewModel.swift in Sources */,
 				CDE031D12C6BA2A90026677F /* AnalysisViewController.swift in Sources */,
 				CDE031BB2C6BA08B0026677F /* ExpensesViewController.swift in Sources */,
 				CD7006632C6BDD8F00EAE0CD /* ExpensesPageViewController.swift in Sources */,
@@ -241,6 +284,7 @@
 				CDD283882C6CF07500BA95F6 /* ExpensesObject.swift in Sources */,
 				CDE031B72C6BA08B0026677F /* AppDelegate.swift in Sources */,
 				CDE031D92C6BAE950026677F /* ExpensesTableViewCell.swift in Sources */,
+				CDA019542C6E55CD002ACF11 /* ExpTransactionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

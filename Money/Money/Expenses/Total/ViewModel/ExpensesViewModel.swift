@@ -16,7 +16,7 @@ final class ExpensesViewModel: ExpensesViewModelProtocol {
     private var centralSection = TableViewSection(title: nil, items: [])
     
     init() {
-        setMocks()
+//        setMocks()
         getExpense()
         setupTable()
     }

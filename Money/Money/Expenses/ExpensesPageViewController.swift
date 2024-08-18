@@ -8,15 +8,16 @@
 import UIKit
 import SnapKit
 
-final class ExpensesPageViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+final class ExpensesPageViewController: UIPageViewController,
+                                            UIPageViewControllerDelegate,
+                                            UIPageViewControllerDataSource {
     
     // MARK: - Properties
     var pageViewController = UIPageViewController()
     var pageControl = UIPageControl(frame: CGRect())
-    // временно взяты одинаковые контроллеры, для наглядности
-    let pages = [
+    let pages: [UIViewController] = [
         ExpensesViewController(viewModel: ExpensesViewModel()),
-        ExpensesViewController(viewModel: ExpensesViewModel())
+        ExpTransactionViewController(viewModel: ExpTransactionViewModel())
     ]
     
     // MARK: - Life Cycle
@@ -59,14 +60,14 @@ final class ExpensesPageViewController: UIPageViewController, UIPageViewControll
     
     // MARK: - UIPageViewControllerDataSource
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let index = pages.firstIndex(of: viewController as! ExpensesViewController), index > 0 else {
+        guard let index = pages.firstIndex(of: viewController), index > 0 else {
                     return nil
                 }
                 return pages[index - 1]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = pages.firstIndex(of: viewController as! ExpensesViewController), index < pages.count - 1 else {
+        guard let index = pages.firstIndex(of: viewController), index < pages.count - 1 else {
                     return nil
                 }
                 return pages[index + 1]
@@ -75,7 +76,7 @@ final class ExpensesPageViewController: UIPageViewController, UIPageViewControll
     // MARK: - UIPageViewControllerDelegate
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
             if let visibleViewController = pageViewController.viewControllers?.first,
-               let index = pages.firstIndex(of: visibleViewController as! ExpensesViewController) {
+               let index = pages.firstIndex(of: visibleViewController) {
                 pageControl.currentPage = index
             }
         }

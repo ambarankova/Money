@@ -37,8 +37,10 @@ class ExpensesViewController: UIViewController, UITableViewDelegate, UITableView
         button.setTitle("+", for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 40)
         button.backgroundColor = .lightGray
-        button.titleLabel?.textAlignment = .center
         button.layer.cornerRadius = CGFloat(buttonHeight / 2)
+        button.addTarget(self,
+                         action: #selector(goToTransactionViewController),
+                         for: .touchUpInside)
         
         return button
     }()
@@ -80,7 +82,6 @@ class ExpensesViewController: UIViewController, UITableViewDelegate, UITableView
         table.register(ExpensesTableViewCell.self, forCellReuseIdentifier: "ExpensesTableViewCell")
         table.dataSource = self
         table.delegate = self
-//        table.frame = view.bounds
 //        table.separatorStyle = .none
     }
     
@@ -113,6 +114,11 @@ class ExpensesViewController: UIViewController, UITableViewDelegate, UITableView
             make.trailing.equalToSuperview().inset(40)
             make.top.equalTo(table.snp.bottom).offset(20)
         }
+    }
+    
+    @objc private func goToTransactionViewController() {
+//        navigationController?.pushViewController(ExpTransactionViewController(), animated: true)
+        present(ExpTransactionViewController(viewModel: ExpTransactionViewModel()), animated: true)
     }
     
     // MARK: - UITableViewDataSourse
