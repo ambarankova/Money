@@ -11,4 +11,5 @@ struct ExpensesObject: TableViewSectionProtocol {
     let category: String
     let plan: Int?
     let fact: Int?
+    let date: Date?
 }

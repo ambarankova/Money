@@ -88,6 +88,7 @@
 			children = (
 				CDA019532C6E55CD002ACF11 /* ExpTransactionViewController.swift */,
 				CDA0195B2C6E6261002ACF11 /* ExpTransactionTableViewCell.swift */,
+				FA8567D32C6EAC9A00C7A965 /* AddExpensesViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -148,7 +149,6 @@
 			children = (
 				CDE031BA2C6BA08B0026677F /* ExpensesViewController.swift */,
 				CDE031D82C6BAE950026677F /* ExpensesTableViewCell.swift */,
-				FA8567D32C6EAC9A00C7A965 /* AddExpensesViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

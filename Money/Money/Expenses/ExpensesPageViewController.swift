@@ -9,14 +9,14 @@ import UIKit
 import SnapKit
 
 final class ExpensesPageViewController: UIPageViewController {
-
-    // MARK: - UI elements
+    
+    // MARK: - GUI elements
     private let pageControl = UIPageControl(frame: CGRect())
-
+    
     // MARK: - Properties
-private let pages = [
+    private let pages = [
         ExpensesViewController(viewModel: ExpensesViewModel()),
-        ExpTransactionViewController(viewModel: ExpTransactionViewModel())
+        ExpTransactionViewController(viewModel: ExpTransactionViewModel(transaction: nil))
     ]
     
     // MARK: - Life Cycle
@@ -25,7 +25,7 @@ private let pages = [
                    navigationOrientation: .horizontal,
                    options: nil)
     }
-
+    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -33,7 +33,7 @@ private let pages = [
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupPageViewController()
         setupUI()
         setupPageControl()
@@ -46,57 +46,31 @@ private extension ExpensesPageViewController {
         view.addSubview(pageControl)
         setupConstraints()
     }
-
+    
     func setupPageViewController() {
         dataSource = self
         delegate = self
-
+        
         setViewControllers([pages[0]], direction: .forward, animated: true, completion: nil)
     }
-
+    
     func setupPageControl() {
         pageControl.numberOfPages = pages.count
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = .lightGray
         pageControl.currentPageIndicatorTintColor = .black
     }
-
+    
     func setupConstraints() {
         pageControl.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(5)
             make.centerX.equalToSuperview()
         }
     }
-    
-//    // MARK: - UIPageViewControllerDataSource
-//    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-//        guard let index = pages.firstIndex(of: viewController), index > 0 else {
-//                    return nil
-//                }
-//                return pages[index - 1]
-//    }
-//
-//    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-//        guard let index = pages.firstIndex(of: viewController), index < pages.count - 1 else {
-//                    return nil
-//                }
-//                return pages[index + 1]
-//    }
-//
-//    // MARK: - UIPageViewControllerDelegate
-//    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-//            if let visibleViewController = pageViewController.viewControllers?.first,
-//               let index = pages.firstIndex(of: visibleViewController) {
-//                pageControl.currentPage = index
-//            }
-//        }
 }
 
 // MARK: - UIPageViewControllerDelegate
-
 extension ExpensesPageViewController: UIPageViewControllerDelegate {
-    
-
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard
             let visibleViewController = pageViewController.viewControllers?.first,
@@ -110,9 +84,7 @@ extension ExpensesPageViewController: UIPageViewControllerDelegate {
 }
 
 // MARK: - UIPageViewControllerDataSource
-
 extension ExpensesPageViewController: UIPageViewControllerDataSource {
-
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard
             let expensesViewController = viewController as? ExpensesViewController,
@@ -123,7 +95,7 @@ extension ExpensesPageViewController: UIPageViewControllerDataSource {
         }
         return pages[index - 1]
     }
-
+    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard
             let expensesViewController = viewController as? ExpensesViewController,

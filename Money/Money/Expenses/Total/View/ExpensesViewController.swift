@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 
 final class ExpensesViewController: UIViewController {
-    
     // MARK: - GUI Variables
     private let table = UITableView()
     
@@ -27,17 +26,6 @@ final class ExpensesViewController: UIViewController {
         label.font = .systemFont(ofSize: 20)
         label.textAlignment = .center
         return label
-    }()
-    
-    private let plusButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(Constants.Texts.buttonTitle, for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 40)
-        button.backgroundColor = .lightGray
-        button.titleLabel?.textAlignment = .center
-        button.layer.cornerRadius = CGFloat(Constants.Sizes.buttonHeight / 2)
-        button.addTarget(nil, action: #selector(addButtonTapped), for: .touchUpInside)
-        return button
     }()
     
     // MARK: - Properties
@@ -67,16 +55,7 @@ final class ExpensesViewController: UIViewController {
 }
 
 // MARK: - Private
-
 private extension ExpensesViewController {
-    
-    @objc
-    func addButtonTapped() {
-        let addExpenseVC = AddExpensesViewController()
-        addExpenseVC.delegate = self
-        present(addExpenseVC, animated: true, completion: nil)
-    }
-    
     private func setupTableView() {
         table.register(ExpensesTableViewCell.self, forCellReuseIdentifier: ExpensesTableViewCell.reuseID)
         table.dataSource = self
@@ -84,7 +63,7 @@ private extension ExpensesViewController {
     }
     
     func setupUI() {
-        [countLabel, monthLabel, table, plusButton].forEach { view.addSubview($0) }
+        [countLabel, monthLabel, table].forEach { view.addSubview($0) }
         view.backgroundColor = .white
         
         setupConstraints()
@@ -92,7 +71,7 @@ private extension ExpensesViewController {
     
     func setupConstraints() {
         countLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).inset(70)
+            make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
         }
         
@@ -105,12 +84,6 @@ private extension ExpensesViewController {
             make.top.equalTo(monthLabel.snp.bottom).offset(20)
             make.trailing.leading.equalToSuperview().inset(10)
             make.height.equalTo(400)
-        }
-        
-        plusButton.snp.makeConstraints { make in
-            make.width.height.equalTo(Constants.Sizes.buttonHeight)
-            make.trailing.equalToSuperview().inset(40)
-            make.top.equalTo(table.snp.bottom).offset(20)
         }
     }
 }
@@ -144,28 +117,14 @@ extension ExpensesViewController: UITableViewDataSource {
     }
 }
 
-// MARK: - AddExpensesViewControllerDelegate
-// Передадим данные через делегат контроллера
-
-extension ExpensesViewController: AddExpensesViewControllerDelegate {
-    
-    func didAddExpense(_ expense: ExpensesObject) {
-        viewModel?.addExpenses(expense)
-        // передаем во вью модель данные
-    }
-}
-
 // MARK: - UI constants
 private extension ExpensesViewController {
-
     enum Constants {
         enum Texts {
             static let countLabelText = "Count"
             static let monthLabelText = "was saved in this month"
-            static let buttonTitle = "+"
         }
         enum Sizes {
-            static let buttonHeight: CGFloat = 70.0
         }
     }
 }

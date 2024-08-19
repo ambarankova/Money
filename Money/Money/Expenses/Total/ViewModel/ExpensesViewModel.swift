@@ -9,7 +9,6 @@ import UIKit
 
 protocol ExpensesViewModelProtocol {
     var sections: [TableViewSection] { get }
-    func addExpenses(_ expenses: ExpensesObject)
 }
 
 final class ExpensesViewModel: ExpensesViewModelProtocol {
@@ -17,8 +16,8 @@ final class ExpensesViewModel: ExpensesViewModelProtocol {
     private var centralSection = TableViewSection(title: nil, items: [])
     
     init() {
-        setMocks()
-//        getExpense()
+//        setMocks()
+        getExpense()
         initialSetupTable()
     }
     
@@ -35,24 +34,23 @@ final class ExpensesViewModel: ExpensesViewModelProtocol {
                 result.fact += fact
             }
         }
+        
         sections = [
-            TableViewSection(items: [ExpensesObject(category: "Category", plan: nil, fact: nil)]),
+            TableViewSection(items: [ExpensesObject(category: "Category", plan: nil, fact: nil, date: nil)]),
             centralSection,
-            TableViewSection(items: [ExpensesObject(category: "Total", plan: totals.plan, fact: totals.fact)])
+            TableViewSection(items: [ExpensesObject(category: "Total", plan: totals.plan, fact: totals.fact, date: nil)])
         ]
     }
 
-    private func setMocks() {
-        centralSection = TableViewSection(items:
-                                            [ExpensesObject(category: "Transport",
-                                                                plan: 2000,
-                                                                fact: 0),
-                                             ExpensesObject(category: "Beauty",
-                                                                plan: 5000,
-                                                                fact: 1000)])
-    }
-    
-    func addExpenses(_ expenses: ExpensesObject) {
-        // обработай полученые данные из expenses и верни их в контроллер
-    }
+//    private func setMocks() {
+//        centralSection = TableViewSection(items:
+//                                            [ExpensesObject(category: "Transport",
+//                                                                plan: 2000,
+//                                                                fact: 2000,
+//                                                                date: "01 jan 2001"),
+//                                             ExpensesObject(category: "Beauty",
+//                                                                plan: 5000,
+//                                                                fact: 1000,
+//                                                                date: "02 jan 2001")])
+//    }
 }

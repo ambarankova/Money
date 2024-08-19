@@ -10,10 +10,11 @@ final class AddExpensesViewController: UIViewController {
     // MARK: - Properties
     private let categories = ["Transport", "Beauty", "Food", "Health"]
     private var selectedCategory: String?
+    private let dateFormatter = DateFormatter()
 
     weak var delegate: AddExpensesViewControllerDelegate?
 
-    // MARK: - UI Elements
+    // MARK: - GUI Elements
     private let categoryTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Select Category"
@@ -28,6 +29,8 @@ final class AddExpensesViewController: UIViewController {
         textField.keyboardType = .decimalPad
         return textField
     }()
+    
+    private let datePicker = UIDatePicker()
 
     private let saveButton: UIButton = {
         let button = UIButton(type: .system)
@@ -39,7 +42,6 @@ final class AddExpensesViewController: UIViewController {
     private let categoryPickerView = UIPickerView()
 
     // MARK: - Lifecycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -48,42 +50,48 @@ final class AddExpensesViewController: UIViewController {
 }
 
 // MARK: - Private
-
 private extension AddExpensesViewController {
-
-    @objc
-    func saveButtonTapped() {
+    @objc func saveButtonTapped() {
         guard let category = selectedCategory,
               let amountText = amountTextField.text,
               let amount = Int(amountText) else { return }
-
-        let expense = ExpensesObject(category: category, plan: amount, fact: amount)
+        let date = datePicker.date
+        
+        //        dateFormatter.dateFormat = "dd-MM-yyyy"
+        //        let date = dateFormatter.string(from: datePicker.date)
+        
+        let expense = ExpensesObject(category: category, plan: amount, fact: amount, date: date)
         delegate?.didAddExpense(expense)
         dismiss(animated: true, completion: nil)
     }
-
+    
     func setupUI() {
         view.backgroundColor = .white
 
-        view.addSubview(categoryTextField)
-        view.addSubview(amountTextField)
-        view.addSubview(saveButton)
+        [categoryTextField, amountTextField, datePicker, saveButton].forEach { view.addSubview($0) }
         setupConstraints()
     }
 
     func setupConstraints() {
         categoryTextField.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
-            make.leading.trailing.equalToSuperview().offset(20)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
         }
 
         amountTextField.snp.makeConstraints { make in
             make.top.equalTo(categoryTextField.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().offset(20)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+        }
+        
+        datePicker.snp.makeConstraints { make in
+            make.top.equalTo(amountTextField.snp.bottom).offset(20)
+            make.trailing.equalToSuperview().offset(-20)
         }
 
         saveButton.snp.makeConstraints { make in
-            make.top.equalTo(amountTextField.snp.bottom).offset(20)
+            make.top.equalTo(datePicker.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
     }
@@ -97,7 +105,6 @@ private extension AddExpensesViewController {
 }
 
 // MARK: - UIPickerViewDelegate & UIPickerViewDataSource
-
 extension AddExpensesViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

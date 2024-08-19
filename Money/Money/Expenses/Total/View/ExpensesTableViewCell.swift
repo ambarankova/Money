@@ -11,7 +11,6 @@ import SnapKit
 final class ExpensesTableViewCell: UITableViewCell {
 
     // MARK: - GUI Variables
-
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
@@ -57,10 +56,8 @@ final class ExpensesTableViewCell: UITableViewCell {
     }
 }
 
-// MARK: - Private Methods
-
+// MARK: - Private
 private extension ExpensesTableViewCell {
-
     func setupUI() {
         contentView.addSubview(stackView)
         [categoryLabel, planLabel, factLabel].forEach { stackView.addArrangedSubview($0) }
