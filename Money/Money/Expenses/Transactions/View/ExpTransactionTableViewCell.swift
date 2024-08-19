@@ -29,6 +29,7 @@ final class ExpTransactionTableViewCell: UITableViewCell {
     // MARK: - Properties
     static let reuseID = "ExpTransactionTableViewCell"
     private let textSize: CGFloat = 17
+    private let dateFormatter = DateFormatter()
     
     // MARK: - Initializations
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -48,9 +49,15 @@ final class ExpTransactionTableViewCell: UITableViewCell {
 
         let defaultFactText = "Fact"
         let defaultDateText = "Date"
+        dateFormatter.dateFormat = "dd MMM yyyy"
 
         factLabel.text = expense.fact.map(String.init) ?? defaultFactText
-        dateLabel.text = defaultDateText
+        
+        if let date = expense.date {
+            dateLabel.text = dateFormatter.string(from: date)
+        } else {
+            dateLabel.text = defaultDateText
+        }
     }
 }
 

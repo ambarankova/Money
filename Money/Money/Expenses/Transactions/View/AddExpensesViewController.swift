@@ -30,7 +30,13 @@ final class AddExpensesViewController: UIViewController {
         return textField
     }()
     
-    private let datePicker = UIDatePicker()
+    private let datePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        
+        picker.datePickerMode = .date
+        
+        return picker
+    }()
 
     private let saveButton: UIButton = {
         let button = UIButton(type: .system)
@@ -56,9 +62,6 @@ private extension AddExpensesViewController {
               let amountText = amountTextField.text,
               let amount = Int(amountText) else { return }
         let date = datePicker.date
-        
-        //        dateFormatter.dateFormat = "dd-MM-yyyy"
-        //        let date = dateFormatter.string(from: datePicker.date)
         
         let expense = ExpensesObject(category: category, plan: amount, fact: amount, date: date)
         delegate?.didAddExpense(expense)

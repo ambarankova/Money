@@ -59,7 +59,11 @@ final class ExpTransactionViewController: UIViewController {
 
 // MARK: - Private
 private extension ExpTransactionViewController {
-    func setupViewModel() { }
+    func setupViewModel() {
+        viewModel?.reloadTable = { [weak self] in
+            self?.table.reloadData()
+        }
+    }
     
     func setupTableView() {
         table.register(ExpTransactionTableViewCell.self, forCellReuseIdentifier: ExpTransactionTableViewCell.reuseID)
