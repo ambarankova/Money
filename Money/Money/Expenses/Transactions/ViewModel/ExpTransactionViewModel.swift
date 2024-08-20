@@ -27,6 +27,8 @@ final class ExpTransactionViewModel: ExpTransactionViewModelProtocol {
     
     init() {
         initialSetupTable()
+        // Забыла вызывать загрузку транзакций 
+        getTransactions()
     }
     
     func getTransactions() {
