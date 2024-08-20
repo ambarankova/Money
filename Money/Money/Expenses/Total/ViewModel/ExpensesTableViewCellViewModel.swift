@@ -9,8 +9,8 @@ import Foundation
 
 final class ExpensesTableViewCellViewModel {
     let name: String
-    let plan: Int
-    let fact: Int
+    let plan: Float
+    let fact: Float
     
     init(expense: ExpensesObject) {
         name = expense.category

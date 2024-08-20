@@ -28,17 +28,17 @@ final class ExpensesViewModel: ExpensesViewModelProtocol {
     private func initialSetupTable() {
         let totals = centralSection.items.reduce(into: (plan: 0, fact: 0)) { result, item in
             if let plan = item.plan {
-                result.plan += plan
+                result.plan += Int(plan)
             }
             if let fact = item.fact {
-                result.fact += fact
+                result.fact += Int(fact)
             }
         }
         
         sections = [
             TableViewSection(items: [ExpensesObject(category: "Category", plan: nil, fact: nil, date: nil)]),
             centralSection,
-            TableViewSection(items: [ExpensesObject(category: "Total", plan: totals.plan, fact: totals.fact, date: nil)])
+            TableViewSection(items: [ExpensesObject(category: "Total", plan: Float(totals.plan), fact: Float(totals.fact), date: nil)])
         ]
     }
 

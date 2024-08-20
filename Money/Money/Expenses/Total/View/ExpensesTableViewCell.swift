@@ -50,9 +50,18 @@ final class ExpensesTableViewCell: UITableViewCell {
 
         let defaultPlanText = "Plan"
         let defaultFactText = "Fact"
+        
+        if let plan = expense.plan {
+            planLabel.text = String(plan)
+        } else {
+            planLabel.text = defaultPlanText
+        }
 
-        planLabel.text = expense.plan.map(String.init) ?? defaultPlanText
-        factLabel.text = expense.fact.map(String.init) ?? defaultFactText
+        if let fact = expense.fact {
+            factLabel.text = String(fact)
+        } else {
+            factLabel.text = defaultFactText
+        }
     }
 }
 

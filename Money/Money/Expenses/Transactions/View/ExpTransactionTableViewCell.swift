@@ -51,7 +51,11 @@ final class ExpTransactionTableViewCell: UITableViewCell {
         let defaultDateText = "Date"
         dateFormatter.dateFormat = "dd MMM yyyy"
 
-        factLabel.text = expense.fact.map(String.init) ?? defaultFactText
+        if let fact = expense.fact {
+            factLabel.text = String(fact)
+        } else {
+            factLabel.text = defaultFactText
+        }
         
         if let date = expense.date {
             dateLabel.text = dateFormatter.string(from: date)

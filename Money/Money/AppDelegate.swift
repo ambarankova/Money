@@ -11,7 +11,7 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     static var persistantContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "model")
+        let container = NSPersistentContainer(name: "Model")
         
         container.loadPersistentStores { description, error in
             if let error = error {

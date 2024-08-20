@@ -54,6 +54,7 @@ final class ExpTransactionViewController: UIViewController {
         
         setupTableView()
         setupUI()
+        registerObserver()
     }
 }
 
@@ -63,6 +64,14 @@ private extension ExpTransactionViewController {
         viewModel?.reloadTable = { [weak self] in
             self?.table.reloadData()
         }
+    }
+    
+    private func registerObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateData), name: NSNotification.Name("Update"), object: nil)
+    }
+    
+    @objc private func updateData() {
+        viewModel?.getTransactions()
     }
     
     func setupTableView() {

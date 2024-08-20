@@ -9,6 +9,6 @@ import Foundation
 
 struct IncomeObject {
     let name: String
-    let plan: Int
-    let fact: Int
+    let plan: Float
+    let fact: Float
 }

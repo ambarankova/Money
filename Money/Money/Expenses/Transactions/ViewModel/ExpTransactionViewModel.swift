@@ -10,6 +10,7 @@ import Foundation
 protocol ExpTransactionViewModelProtocol {
     var sections: [TableViewSection] { get }
     func addExpenses(_ expenses: ExpensesObject)
+    func getTransactions()
     var reloadTable: (() -> Void)? { get set }
 }
 
@@ -28,13 +29,32 @@ final class ExpTransactionViewModel: ExpTransactionViewModelProtocol {
         initialSetupTable()
     }
     
+    func getTransactions() {
+        let transactions = TransactionPersistant.fetchAll()
+        
+        let groupedObjects = transactions.reduce(into: [Date: [ExpensesObject]]()) { result, transactions in
+            let date = Calendar.current.startOfDay(for: transactions.date ?? Date())
+            result[date, default: []].append(transactions)
+        }
+        
+        let keys = groupedObjects.keys
+        keys.forEach { key in
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "d MMM yyyy"
+            sections.append(TableViewSection(items: groupedObjects[key] ?? []))
+        }
+    }
+
     func addExpenses(_ expenses: ExpensesObject) {
-        lastSection = TableViewSection(items:
-                                        [ExpensesObject(category: expenses.category,
-                                                        plan: expenses.plan,
-                                                        fact: expenses.fact,
-                                                        date: expenses.date)])
-        sections.append(lastSection)
+        
+        TransactionPersistant.save(expenses)
+        
+//        lastSection = TableViewSection(items:
+//                                        [ExpensesObject(category: expenses.category,
+//                                                        plan: expenses.plan,
+//                                                        fact: expenses.fact,
+//                                                        date: expenses.date)])
+//        sections.append(lastSection)
     }
     
     

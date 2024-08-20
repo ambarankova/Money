@@ -9,7 +9,7 @@ import Foundation
 
 struct ExpensesObject: TableViewSectionProtocol {
     let category: String
-    let plan: Int?
-    let fact: Int?
+    let plan: Float?
+    let fact: Float?
     let date: Date?
 }

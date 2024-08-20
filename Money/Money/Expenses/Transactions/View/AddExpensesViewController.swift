@@ -60,7 +60,7 @@ private extension AddExpensesViewController {
     @objc func saveButtonTapped() {
         guard let category = selectedCategory,
               let amountText = amountTextField.text,
-              let amount = Int(amountText) else { return }
+              let amount = Float(amountText) else { return }
         let date = datePicker.date
         
         let expense = ExpensesObject(category: category, plan: amount, fact: amount, date: date)
