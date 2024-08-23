@@ -32,6 +32,7 @@ final class ExpTransactionViewModel: ExpTransactionViewModelProtocol {
     }
     
     func getTransactions() {
+        sections.removeAll()
         let transactions = TransactionPersistant.fetchAll()
         
         let groupedObjects = transactions.reduce(into: [Date: [ExpensesObject]]()) { result, transactions in
@@ -48,15 +49,8 @@ final class ExpTransactionViewModel: ExpTransactionViewModelProtocol {
     }
 
     func addExpenses(_ expenses: ExpensesObject) {
-        
         TransactionPersistant.save(expenses)
-        
-//        lastSection = TableViewSection(items:
-//                                        [ExpensesObject(category: expenses.category,
-//                                                        plan: expenses.plan,
-//                                                        fact: expenses.fact,
-//                                                        date: expenses.date)])
-//        sections.append(lastSection)
+        getTransactions()
     }
     
     

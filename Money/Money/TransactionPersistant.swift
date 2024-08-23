@@ -65,6 +65,7 @@ final class TransactionPersistant {
     
     private static func getEntity(for transaction: ExpensesObject) -> TransactionEntity? {
         let request = TransactionEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "category == %@ AND date == %@", transaction.category, transaction.date as? NSDate ?? NSDate())
     
         do {
             let objects = try context.fetch(request)
