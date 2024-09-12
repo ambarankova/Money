@@ -127,6 +127,16 @@ extension ExpTransactionViewController: AddExpensesViewControllerDelegate {
 extension ExpTransactionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let expense = viewModel?.sections[indexPath.section].items[indexPath.row] as? ExpensesObject else { return nil}
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (action, view, success) in
+            print("Delete action")
+            TransactionPersistant.delete(expense)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 }
 
 // MARK: - UITableViewDataSourse

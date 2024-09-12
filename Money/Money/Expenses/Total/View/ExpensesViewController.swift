@@ -49,13 +49,25 @@ final class ExpensesViewController: UIViewController {
         
         setupTableView()
         setupUI()
+        registerObserver()
     }
-    
-    private func setupViewModel() { }
 }
 
 // MARK: - Private
 private extension ExpensesViewController {
+    func setupViewModel() {
+        viewModel?.reloadTable = { [weak self] in
+            self?.table.reloadData()
+        }
+    }
+    
+    private func registerObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateData), name: NSNotification.Name("Update"), object: nil)
+    }
+    
+    @objc private func updateData() {
+        viewModel?.getExpense()
+    }
     private func setupTableView() {
         table.register(ExpensesTableViewCell.self, forCellReuseIdentifier: ExpensesTableViewCell.reuseID)
         table.dataSource = self
@@ -92,6 +104,13 @@ private extension ExpensesViewController {
 extension ExpensesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
+    }
+}
+
+// MARK: - AddExpensesViewControllerDelegate
+extension ExpensesViewController: AddExpensesViewControllerDelegate {
+    func didAddExpense(_ expense: ExpensesObject) {
+        viewModel?.addExpenses(expense)
     }
 }
 

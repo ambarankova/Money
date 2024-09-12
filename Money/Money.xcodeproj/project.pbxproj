@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD1DB1902C78E1ED008B31EF /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1DB18F2C78E1ED008B31EF /* Categories.swift */; };
 		CD7006632C6BDD8F00EAE0CD /* ExpensesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7006622C6BDD8F00EAE0CD /* ExpensesPageViewController.swift */; };
 		CDA019522C6E3399002ACF11 /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA019512C6E3399002ACF11 /* TableViewSection.swift */; };
 		CDA019542C6E55CD002ACF11 /* ExpTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA019532C6E55CD002ACF11 /* ExpTransactionViewController.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD1DB18F2C78E1ED008B31EF /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		CD7006622C6BDD8F00EAE0CD /* ExpensesPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesPageViewController.swift; sourceTree = "<group>"; };
 		CDA019512C6E3399002ACF11 /* TableViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSection.swift; sourceTree = "<group>"; };
 		CDA019532C6E55CD002ACF11 /* ExpTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpTransactionViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				CDD283872C6CF07500BA95F6 /* ExpensesObject.swift */,
+				CD1DB18F2C78E1ED008B31EF /* Categories.swift */,
 				CDD2838A2C6CF10100BA95F6 /* IncomeObject.swift */,
 			);
 			path = Model;
@@ -309,6 +312,7 @@
 				CD7006632C6BDD8F00EAE0CD /* ExpensesPageViewController.swift in Sources */,
 				CDE031CD2C6BA1F40026677F /* ChatViewController.swift in Sources */,
 				CDD283882C6CF07500BA95F6 /* ExpensesObject.swift in Sources */,
+				CD1DB1902C78E1ED008B31EF /* Categories.swift in Sources */,
 				CDE031B72C6BA08B0026677F /* AppDelegate.swift in Sources */,
 				CDE031D92C6BAE950026677F /* ExpensesTableViewCell.swift in Sources */,
 				CDA019542C6E55CD002ACF11 /* ExpTransactionViewController.swift in Sources */,
