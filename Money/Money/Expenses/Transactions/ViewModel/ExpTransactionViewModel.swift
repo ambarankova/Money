@@ -48,6 +48,8 @@ final class ExpTransactionViewModel: ExpTransactionViewModelProtocol {
     }
 
     func addExpenses(_ expenses: ExpensesObject) {
+        NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
+        
         TransactionPersistant.save(expenses)
         getTransactions()
     }

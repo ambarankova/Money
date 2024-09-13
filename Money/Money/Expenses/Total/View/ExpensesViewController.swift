@@ -51,6 +51,10 @@ final class ExpensesViewController: UIViewController {
         setupUI()
         registerObserver()
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 // MARK: - Private
@@ -66,8 +70,9 @@ private extension ExpensesViewController {
     }
     
     @objc private func updateData() {
-        viewModel?.getExpense()
+        table.reloadData()
     }
+    
     private func setupTableView() {
         table.register(ExpensesTableViewCell.self, forCellReuseIdentifier: ExpensesTableViewCell.reuseID)
         table.dataSource = self
@@ -77,6 +82,13 @@ private extension ExpensesViewController {
     func setupUI() {
         [countLabel, monthLabel, table].forEach { view.addSubview($0) }
         view.backgroundColor = .white
+        
+        let countInt = viewModel?.count ?? 0
+        countLabel.text = String(countInt)
+        
+        if countInt < 0 {
+            monthLabel.text = "your minus in this month"
+        }
         
         setupConstraints()
     }
@@ -103,14 +115,30 @@ private extension ExpensesViewController {
 // MARK: - UITableViewDelegate
 extension ExpensesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-    }
-}
-
-// MARK: - AddExpensesViewControllerDelegate
-extension ExpensesViewController: AddExpensesViewControllerDelegate {
-    func didAddExpense(_ expense: ExpensesObject) {
-        viewModel?.addExpenses(expense)
+        if indexPath.section != 0 && (indexPath.section + 1) != viewModel?.sections.count {
+            guard let category = viewModel?.sections[indexPath.section].items[indexPath.row].category else { return }
+            
+            let alertController = UIAlertController(title: "Change plan", message: nil, preferredStyle: .alert)
+            
+            alertController.addTextField { (textField) in
+                textField.placeholder = "New plan value"
+                textField.keyboardType = .numberPad
+            }
+            
+            let confirmAction = UIAlertAction(title: "OK", style: .default) { _ in
+                if let newPlanText = alertController.textFields?.first?.text,
+                   let newPlan = Float(newPlanText) {
+                    self.viewModel?.changePlan(newPlan, category)
+                }
+            }
+            
+            let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+            
+            alertController.addAction(confirmAction)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+        }
     }
 }
 
@@ -141,7 +169,7 @@ private extension ExpensesViewController {
     enum Constants {
         enum Texts {
             static let countLabelText = "Count"
-            static let monthLabelText = "was saved in this month"
+            static let monthLabelText = "you still can spend this month"
         }
         enum Sizes {
         }
