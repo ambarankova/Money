@@ -29,24 +29,15 @@ final class ExpensesViewController: UIViewController {
     }()
     
     // MARK: - Properties
-    private var viewModel: ExpensesViewModelProtocol?
+    var viewModel: ExpensesViewModelProtocol?
     
     // MARK: - Life Cycle
-    init(viewModel: ExpensesViewModelProtocol) {
-        self.viewModel = viewModel
-        
-        super.init(nibName: nil, bundle: nil)
-        
-        self.setupViewModel()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.viewModel = ExpensesViewModel()
+        
+        setupViewModel()
         setupTableView()
         setupUI()
         registerObserver()
@@ -66,7 +57,9 @@ private extension ExpensesViewController {
     }
     
     @objc private func updateData() {
-        viewModel?.getExpense()
+        viewModel?.reloadTable = { [weak self] in
+            self?.table.reloadData()
+        }
     }
     private func setupTableView() {
         table.register(ExpensesTableViewCell.self, forCellReuseIdentifier: ExpensesTableViewCell.reuseID)
@@ -77,6 +70,13 @@ private extension ExpensesViewController {
     func setupUI() {
         [countLabel, monthLabel, table].forEach { view.addSubview($0) }
         view.backgroundColor = .white
+        
+        let countInt = viewModel?.count ?? 0
+        countLabel.text = String(countInt)
+        
+        if countInt < 0 {
+            monthLabel.text = "your minus in this month"
+        }
         
         setupConstraints()
     }
@@ -98,12 +98,45 @@ private extension ExpensesViewController {
             make.height.equalTo(400)
         }
     }
+    
+    private func addPlanAlert() {
+        
+    }
 }
 
 // MARK: - UITableViewDelegate
 extension ExpensesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let transactions = TransactionPersistant.fetchAll()
+//        var expense = transactions[indexPath.row]
+        guard var expense = viewModel?.sections[indexPath.section].items[indexPath.row] as? ExpensesObject else { return }
 
+        let alertController = UIAlertController(title: "Change plan", message: nil, preferredStyle: .alert)
+
+        alertController.addTextField { (textField) in
+            textField.placeholder = "New plan value"
+            textField.keyboardType = .numberPad
+        }
+
+        let confirmAction = UIAlertAction(title: "OK", style: .default) { _ in
+            if let newPlanText = alertController.textFields?.first?.text,
+               let newPlan = Float(newPlanText) {
+                expense.plan = newPlan
+                self.viewModel?.changePlan(expense)
+                
+                guard let cell = tableView.cellForRow(at: indexPath) as? ExpensesTableViewCell else { return }
+                
+                cell.configure(with: expense)
+
+            }
+        }
+
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
     }
 }
 

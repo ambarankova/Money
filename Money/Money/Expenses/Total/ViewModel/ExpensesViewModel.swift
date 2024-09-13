@@ -10,8 +10,11 @@ import UIKit
 protocol ExpensesViewModelProtocol {
     var sections: [TableViewSection] { get }
     var reloadTable: (() -> Void)? { get set }
+    var count: Int { get }
+    var centralSection: TableViewSection { get }
     func getExpense()
     func addExpenses(_ expenses: ExpensesObject)
+    func changePlan(_ expenses: ExpensesObject)
 }
 
 final class ExpensesViewModel: ExpensesViewModelProtocol {
@@ -21,44 +24,60 @@ final class ExpensesViewModel: ExpensesViewModelProtocol {
             reloadTable?()
         }
     }
-    private var centralSection = TableViewSection(title: nil, items: [])
+    var centralSection = TableViewSection(title: nil, items: [])
+    var count = 0
     
     init() {
-        categorySetupTable()
-        initialSetupTable()
         getExpense()
     }
     
     func getExpense() {
-        sections.removeAll()
+        categorySetupTable()
         let transactions = TransactionPersistant.fetchAll()
+        sections = []
         
         for transaction in transactions {
             if let index = centralSection.items.firstIndex(where: { $0.category == transaction.category }) {
                 let expense = centralSection.items[index]
                 guard var fact = expense.fact else { return }
                 fact += transaction.fact ?? 0
-                centralSection.items[index].fact = fact
+//                guard var plan = expense.plan else { return }
+//                plan += transaction.plan ?? 0
+//                centralSection.items[index].plan = plan
             }
         }
         initialSetupTable()
     }
     
     func addExpenses(_ expenses: ExpensesObject) {
-        //        getExpense()
+        if let index = centralSection.items.firstIndex(where: { $0.category == expenses.category }) {
+            let expense = centralSection.items[index]
+            guard var fact = expense.fact else { return }
+            fact += expenses.fact ?? 0
+            centralSection.items[index].fact = fact
+        }
+    }
+    
+    func changePlan(_ expenses: ExpensesObject) {
+//        var transactions = TransactionPersistant.fetchAll()
         
-        
-                if let index = centralSection.items.firstIndex(where: { $0.category == expenses.category }) {
-                    let expense = centralSection.items[index]
-                    guard var fact = expense.fact else { return }
-                    fact += expense.fact ?? 0
-                    centralSection.items[index].fact = fact
-                }
+//        transactions.forEach { transaction in
+//            if transaction.category == expenses.category {
+//                for i in 0..<transactions.count {
+//                    transactions[i].plan = 2000
+//                }
+//                transaction.plan = expenses.plan
+//            }
+//        }
+//        TransactionPersistant.saveContext()
+//        print(TransactionPersistant.fetchAll())
+//        TransactionPersistant.save(expenses)
+//        getExpense()
     }
     
     private func categorySetupTable() {
         for category in Categories().categories {
-            centralSection.items.append(ExpensesObject(category: category, plan: 0, fact: 0, date: nil))
+            centralSection.items.append(ExpensesObject(category: category, plan: 0, fact: 0, date: Date()))
         }
     }
     
@@ -67,10 +86,12 @@ final class ExpensesViewModel: ExpensesViewModelProtocol {
         let totalFact = centralSection.items.reduce(0) { $0 + ($1.fact ?? 0) }
         
         sections = [
-            TableViewSection(items: [ExpensesObject(category: "Category", plan: nil, fact: nil, date: nil)]),
+            TableViewSection(items: [ExpensesObject(category: "Category", plan: nil, fact: nil, date: Date())]),
             centralSection,
-            TableViewSection(items: [ExpensesObject(category: "Total", plan: totalPlan, fact: totalFact, date: nil)])
+            TableViewSection(items: [ExpensesObject(category: "Total", plan: totalPlan, fact: totalFact, date: Date())])
         ]
+        
+        count = Int(totalPlan - totalFact)
     }
     
     private func setMocks() {

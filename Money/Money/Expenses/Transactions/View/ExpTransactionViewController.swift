@@ -37,21 +37,12 @@ final class ExpTransactionViewController: UIViewController {
     private var viewModel: ExpTransactionViewModelProtocol?
     
     // MARK: - Life Cycle
-    init(viewModel: ExpTransactionViewModelProtocol) {
-        self.viewModel = viewModel
-        
-        super.init(nibName: nil, bundle: nil)
-        
-        self.setupViewModel()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.viewModel = ExpTransactionViewModel()
+        
+        setupViewModel()
         setupTableView()
         setupUI()
         registerObserver()

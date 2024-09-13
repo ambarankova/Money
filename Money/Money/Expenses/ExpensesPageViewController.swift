@@ -15,8 +15,8 @@ final class ExpensesPageViewController: UIPageViewController {
     
     // MARK: - Properties
     private let pages = [
-        ExpensesViewController(viewModel: ExpensesViewModel()),
-        ExpTransactionViewController(viewModel: ExpTransactionViewModel())
+        ExpensesViewController(),
+        ExpTransactionViewController()
     ]
     
     // MARK: - Life Cycle

@@ -18,6 +18,7 @@ extension TransactionEntity {
 
     @NSManaged public var category: String?
     @NSManaged public var amount: Float
+    @NSManaged public var plan: Float
     @NSManaged public var date: Date?
 
 }

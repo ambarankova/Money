@@ -25,6 +25,7 @@ final class TransactionPersistant {
         
         entity?.category = transaction.category
         entity?.amount = transaction.fact ?? 0
+        entity?.plan = transaction.plan ?? 0
         entity?.date = transaction.date
 
         saveContext()
