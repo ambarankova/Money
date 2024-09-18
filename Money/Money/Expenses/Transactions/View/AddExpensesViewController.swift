@@ -8,7 +8,7 @@ protocol AddExpensesViewControllerDelegate: AnyObject {
 final class AddExpensesViewController: UIViewController {
 
     // MARK: - Properties
-    private let categories = ["Transport", "Beauty", "Food", "Health"]
+    let categories = Categories().categories
     private var selectedCategory: String?
     private let dateFormatter = DateFormatter()
 
