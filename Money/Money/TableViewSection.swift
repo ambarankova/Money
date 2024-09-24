@@ -14,6 +14,6 @@ protocol TableViewSectionProtocol {
 }
 
 struct TableViewSection {
-    var title: String?
+//    var title: String?
     var items: [TableViewSectionProtocol]
 }

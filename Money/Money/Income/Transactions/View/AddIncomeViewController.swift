@@ -1,18 +1,25 @@
+//
+//  AddIncomeViewController.swift
+//  Money
+//
+//  Created by Анастасия Ахановская on 24.09.2024.
+//
+
 import UIKit
 import SnapKit
 
-protocol AddExpensesViewControllerDelegate: AnyObject {
-    func didAddExpense(_ expense: TransactionObject)
+protocol AddIncomeViewControllerDelegate: AnyObject {
+    func didAddIncome(_ income: TransactionObject)
 }
 
-final class AddExpensesViewController: UIViewController {
+final class AddIncomeViewController: UIViewController {
 
     // MARK: - Properties
-    let categories = Categories().categoriesExpense
+    let categories = Categories().categoriesIncome
     private var selectedCategory: String?
     private let dateFormatter = DateFormatter()
 
-    weak var delegate: AddExpensesViewControllerDelegate?
+    weak var delegate: AddIncomeViewControllerDelegate?
 
     // MARK: - GUI Elements
     private let categoryTextField: UITextField = {
@@ -56,15 +63,15 @@ final class AddExpensesViewController: UIViewController {
 }
 
 // MARK: - Private
-private extension AddExpensesViewController {
+private extension AddIncomeViewController {
     @objc func saveButtonTapped() {
         guard let category = selectedCategory,
               let amountText = amountTextField.text,
               let amount = Float(amountText) else { return }
         let date = datePicker.date
         
-        let expense = TransactionObject(category: category, plan: amount, fact: amount, date: date)
-        delegate?.didAddExpense(expense)
+        let income = TransactionObject(category: category, plan: amount, fact: amount, date: date)
+        delegate?.didAddIncome(income)
         dismiss(animated: true, completion: nil)
     }
     
@@ -108,7 +115,7 @@ private extension AddExpensesViewController {
 }
 
 // MARK: - UIPickerViewDelegate & UIPickerViewDataSource
-extension AddExpensesViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension AddIncomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

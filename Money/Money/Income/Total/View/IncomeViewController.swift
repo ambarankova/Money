@@ -1,5 +1,5 @@
 //
-//  ExpensesViewController.swift
+//  IncomeViewController.swift
 //  Money
 //
 //  Created by Анастасия Ахановская on 13.08.2024.
@@ -8,11 +8,7 @@
 import SnapKit
 import UIKit
 
-final class ExpensesViewController: BasicVC {
-        @objc override func clearButtonTapped() {
-            viewModel?.clearAll()
-        }
-    
+final class IncomeViewController: BasicVC {
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section != 0 && (indexPath.section + 1) != viewModel?.sections.count {
@@ -55,9 +51,9 @@ final class ExpensesViewController: BasicVC {
                                                        for: indexPath) as? MainTransactionTableViewCell else {
             return UITableViewCell()
         }
-        if let expense = viewModel?.sections[indexPath.section].items[indexPath.row]
+        if let income = viewModel?.sections[indexPath.section].items[indexPath.row]
             as? TransactionObject {
-            cell.configure(with: expense)
+            cell.configure(with: income)
         }
         return cell
     }

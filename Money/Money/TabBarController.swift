@@ -26,12 +26,12 @@ final class TabBarController: UITabBarController {
             setupNavigationController(rootViewController: ExpensesPageViewController(),
                                       title: "Expenses",
                                       image: UIImage(systemName: "arrow.down.circle") ?? UIImage.add),
-            setupNavigationController(rootViewController: IncomeViewController(),
+            setupNavigationController(rootViewController: IncomePageViewController(),
                                       title: "Income",
-                                      image: UIImage(systemName: "arrow.up.circle") ?? UIImage.add),
-            setupNavigationController(rootViewController: AnalysisViewController(),
-                                      title: "Analysis",
-                                      image: UIImage(systemName: "dollarsign.arrow.circlepath") ?? UIImage.add)
+                                      image: UIImage(systemName: "arrow.up.circle") ?? UIImage.add)
+//            setupNavigationController(rootViewController: AnalysisViewController(),
+//                                      title: "Analysis",
+//                                      image: UIImage(systemName: "dollarsign.arrow.circlepath") ?? UIImage.add)
         ]
     }
     

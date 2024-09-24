@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ExpensesObject: TableViewSectionProtocol {
+struct TransactionObject: TableViewSectionProtocol {
     let category: String
     var plan: Float?
     var fact: Float?

@@ -8,5 +8,6 @@
 import Foundation
 
 struct Categories {
-    let categories = ["Transport", "Beauty", "Food", "Health"]
+    let categoriesExpense = ["Transport", "Beauty", "Food", "Health"]
+    let categoriesIncome = ["Work", "Commission", "Rent"]
 }

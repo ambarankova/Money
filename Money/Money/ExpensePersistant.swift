@@ -1,5 +1,5 @@
 //
-//  TransactionPersistant.swift
+//  ExpensePersistant.swift
 //  Money
 //
 //  Created by Анастасия Ахановская on 20.08.2024.
@@ -7,19 +7,20 @@
 
 import CoreData
 import Foundation
+import UIKit
 
-final class TransactionPersistant {
+final class ExpensePersistant {
     private static let context = AppDelegate.persistantContainer.viewContext
     
-    static func save(_ transaction: ExpensesObject) {
-        var entity: TransactionEntity?
+    static func save(_ transaction: TransactionObject) {
+        var entity: ExpenseEntity?
         
         if let ent = getEntity(for: transaction) {
             entity = ent
         } else {
-            guard let description = NSEntityDescription.entity(forEntityName: "TransactionEntity",
+            guard let description = NSEntityDescription.entity(forEntityName: "ExpenseEntity",
                                                                in: context) else { return }
-            entity = TransactionEntity(entity: description,
+            entity = ExpenseEntity(entity: description,
                                     insertInto: context)
         }
         
@@ -30,14 +31,14 @@ final class TransactionPersistant {
         saveContext()
     }
     
-    static func delete(_ transaction: ExpensesObject) {
+    static func delete(_ transaction: TransactionObject) {
         guard let entity = getEntity(for: transaction) else { return }
         context.delete(entity)
         saveContext()
     }
     
-    static func fetchAll() -> [ExpensesObject] {
-        let request = TransactionEntity.fetchRequest()
+    static func fetchAll() -> [TransactionObject] {
+        let request = ExpenseEntity.fetchRequest()
         
         do {
             let objects = try context.fetch(request)
@@ -49,9 +50,9 @@ final class TransactionPersistant {
     }
     
     // MARK: - Private Methods
-    private static func convert(entities: [TransactionEntity]) -> [ExpensesObject] {
+    private static func convert(entities: [ExpenseEntity]) -> [TransactionObject] {
         let transactions = entities.map {
-            ExpensesObject(category: $0.category ?? "",
+            TransactionObject(category: $0.category ?? "",
                            plan: nil,
                            fact: $0.amount,
                            date: $0.date ?? Date())
@@ -63,8 +64,8 @@ final class TransactionPersistant {
         NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
     }
     
-    private static func getEntity(for transaction: ExpensesObject) -> TransactionEntity? {
-        let request = TransactionEntity.fetchRequest()
+    private static func getEntity(for transaction: TransactionObject) -> ExpenseEntity? {
+        let request = ExpenseEntity.fetchRequest()
         request.predicate = NSPredicate(format: "category == %@ AND date == %@", transaction.category, transaction.date as? NSDate ?? NSDate())
     
         do {
@@ -82,6 +83,32 @@ final class TransactionPersistant {
             postNotification()
         } catch let error {
             debugPrint("Save note error: \(error)")
+        }
+    }
+    
+    static func clearCoreData() {
+
+        
+         let context = AppDelegate.persistantContainer.viewContext
+        
+        // Получаем все сущности из Managed Object Model
+        let entityNames = AppDelegate.persistantContainer.managedObjectModel.entities.map({ $0.name! })
+        
+        for entityName in entityNames {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            
+            do {
+                try context.execute(batchDeleteRequest)
+            } catch {
+                print("Ошибка при удалении объектов для сущности \(entityName): \(error)")
+            }
+        }
+        
+        do {
+            try context.save()  // Сохраняем изменения
+        } catch {
+            print("Ошибка при сохранении контекста: \(error)")
         }
     }
 }

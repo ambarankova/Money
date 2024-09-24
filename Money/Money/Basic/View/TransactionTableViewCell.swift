@@ -1,15 +1,13 @@
 //
-//  ExpensesTableViewCell.swift
+//  ExpTransactionTableViewCell.swift
 //  Money
 //
-//  Created by Анастасия Ахановская on 13.08.2024.
+//  Created by Анастасия Ахановская on 15.08.2024.
 //
 
 import UIKit
-import SnapKit
 
-final class ExpensesTableViewCell: UITableViewCell {
-
+final class TransactionTableViewCell: UITableViewCell {
     // MARK: - GUI Variables
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
@@ -23,14 +21,15 @@ final class ExpensesTableViewCell: UITableViewCell {
     private lazy var categoryLabel = createLabel(font: .boldSystemFont(ofSize: textSize),
                                                  aligment: .left,
                                                  text: "Food")
-    private lazy var planLabel = createLabel(font: .systemFont(ofSize: textSize),
-                                             text: "100")
     private lazy var factLabel = createLabel(font: .systemFont(ofSize: textSize),
-                                             text: "20")
+                                             text: "100")
+    private lazy var dateLabel = createLabel(font: .systemFont(ofSize: textSize),
+                                             text: "20 apr 24")
     
     // MARK: - Properties
-    static let reuseID = "ExpensesTableViewCell"
+    static let reuseID = "TransactionTableViewCell"
     private let textSize: CGFloat = 17
+    private let dateFormatter = DateFormatter()
     
     // MARK: - Initializations
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -45,31 +44,32 @@ final class ExpensesTableViewCell: UITableViewCell {
     }
 
     // MARK: - Methods
-    func configure(with expense: ExpensesObject) {
-        categoryLabel.text = expense.category
+    func configure(with transaction: TransactionObject) {
+        categoryLabel.text = transaction.category
 
-        let defaultPlanText = "Plan"
         let defaultFactText = "Fact"
-        
-        if let plan = expense.plan {
-            planLabel.text = String(plan)
-        } else {
-            planLabel.text = defaultPlanText
-        }
+        let defaultDateText = "Date"
+        dateFormatter.dateFormat = "dd MMM yyyy"
 
-        if let fact = expense.fact {
+        if let fact = transaction.fact {
             factLabel.text = String(fact)
         } else {
             factLabel.text = defaultFactText
         }
+        
+        if let date = transaction.date {
+            dateLabel.text = dateFormatter.string(from: date)
+        } else {
+            dateLabel.text = defaultDateText
+        }
     }
 }
 
-// MARK: - Private
-private extension ExpensesTableViewCell {
+// MARK: - Private Methods
+private extension TransactionTableViewCell {
     func setupUI() {
         contentView.addSubview(stackView)
-        [categoryLabel, planLabel, factLabel].forEach { stackView.addArrangedSubview($0) }
+        [categoryLabel, factLabel, dateLabel].forEach { stackView.addArrangedSubview($0) }
         setupConstraints()
     }
 
