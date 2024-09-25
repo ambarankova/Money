@@ -20,9 +20,9 @@ final class TabBarController: UITabBarController {
     private func setupViewControllers() {
         
         viewControllers = [
-            setupNavigationController(rootViewController: ChatViewController(),
-                                      title: "Chat",
-                                      image: UIImage(systemName: "message") ?? UIImage.add),
+            setupNavigationController(rootViewController: CurrencyViewController(viewModel: CurrencyViewModel()),
+                                      title: "Currency",
+                                      image: UIImage(systemName: "dollarsign.arrow.circlepath") ?? UIImage.add),
             setupNavigationController(rootViewController: ExpensesPageViewController(),
                                       title: "Expenses",
                                       image: UIImage(systemName: "arrow.down.circle") ?? UIImage.add),
@@ -50,6 +50,7 @@ final class TabBarController: UITabBarController {
     }
     
     private func setupTabBar() {
+        self.selectedIndex = 1
         let apperance = UITabBarAppearance()
         apperance.configureWithOpaqueBackground()
         tabBar.scrollEdgeAppearance = apperance

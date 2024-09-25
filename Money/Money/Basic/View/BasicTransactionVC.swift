@@ -133,7 +133,6 @@ extension BasicTransactionVC: UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (action, view, success) in
             print("Delete action")
             ExpensePersistant.delete(transaction)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }

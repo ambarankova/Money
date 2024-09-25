@@ -21,6 +21,11 @@
 		CD500A282CA1FAA0008292F5 /* IncomePersistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD500A272CA1FAA0008292F5 /* IncomePersistant.swift */; };
 		CD5483702CA2BD96006BDB9E /* AddIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD54836F2CA2BD96006BDB9E /* AddIncomeViewController.swift */; };
 		CD7006632C6BDD8F00EAE0CD /* ExpensesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7006622C6BDD8F00EAE0CD /* ExpensesPageViewController.swift */; };
+		CD75DE0F2CA4371B008013A3 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75DE0E2CA4371B008013A3 /* APIManager.swift */; };
+		CD75DE112CA43791008013A3 /* CurrencyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75DE102CA43791008013A3 /* CurrencyObject.swift */; };
+		CD75DE132CA43E2D008013A3 /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75DE122CA43E2D008013A3 /* NetworkingError.swift */; };
+		CD75DE152CA43E79008013A3 /* DataCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75DE142CA43E79008013A3 /* DataCurrency.swift */; };
+		CD75DE172CA43FD5008013A3 /* CurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75DE162CA43FD5008013A3 /* CurrencyViewModel.swift */; };
 		CDA019522C6E3399002ACF11 /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA019512C6E3399002ACF11 /* TableViewSection.swift */; };
 		CDA019542C6E55CD002ACF11 /* ExpTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA019532C6E55CD002ACF11 /* ExpTransactionViewController.swift */; };
 		CDA019562C6E5E06002ACF11 /* ExpTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA019552C6E5E06002ACF11 /* ExpTransactionViewModel.swift */; };
@@ -36,9 +41,8 @@
 		CDE031C02C6BA08C0026677F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDE031BF2C6BA08C0026677F /* Assets.xcassets */; };
 		CDE031C32C6BA08C0026677F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDE031C12C6BA08C0026677F /* LaunchScreen.storyboard */; };
 		CDE031CB2C6BA1420026677F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE031CA2C6BA1420026677F /* TabBarController.swift */; };
-		CDE031CD2C6BA1F40026677F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE031CC2C6BA1F40026677F /* ChatViewController.swift */; };
+		CDE031CD2C6BA1F40026677F /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE031CC2C6BA1F40026677F /* CurrencyViewController.swift */; };
 		CDE031CF2C6BA2750026677F /* IncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE031CE2C6BA2750026677F /* IncomeViewController.swift */; };
-		CDE031D12C6BA2A90026677F /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE031D02C6BA2A90026677F /* AnalysisViewController.swift */; };
 		CDE031D72C6BA9410026677F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CDE031D62C6BA9410026677F /* SnapKit */; };
 		CDE031D92C6BAE950026677F /* MainTransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE031D82C6BAE950026677F /* MainTransactionTableViewCell.swift */; };
 		FA8567D42C6EAC9A00C7A965 /* AddExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8567D32C6EAC9A00C7A965 /* AddExpensesViewController.swift */; };
@@ -59,6 +63,11 @@
 		CD500A272CA1FAA0008292F5 /* IncomePersistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomePersistant.swift; sourceTree = "<group>"; };
 		CD54836F2CA2BD96006BDB9E /* AddIncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIncomeViewController.swift; sourceTree = "<group>"; };
 		CD7006622C6BDD8F00EAE0CD /* ExpensesPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesPageViewController.swift; sourceTree = "<group>"; };
+		CD75DE0E2CA4371B008013A3 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		CD75DE102CA43791008013A3 /* CurrencyObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyObject.swift; sourceTree = "<group>"; };
+		CD75DE122CA43E2D008013A3 /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
+		CD75DE142CA43E79008013A3 /* DataCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCurrency.swift; sourceTree = "<group>"; };
+		CD75DE162CA43FD5008013A3 /* CurrencyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewModel.swift; sourceTree = "<group>"; };
 		CDA019512C6E3399002ACF11 /* TableViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSection.swift; sourceTree = "<group>"; };
 		CDA019532C6E55CD002ACF11 /* ExpTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpTransactionViewController.swift; sourceTree = "<group>"; };
 		CDA019552C6E5E06002ACF11 /* ExpTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpTransactionViewModel.swift; sourceTree = "<group>"; };
@@ -76,9 +85,8 @@
 		CDE031C22C6BA08C0026677F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDE031C42C6BA08C0026677F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDE031CA2C6BA1420026677F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		CDE031CC2C6BA1F40026677F /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		CDE031CC2C6BA1F40026677F /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
 		CDE031CE2C6BA2750026677F /* IncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeViewController.swift; sourceTree = "<group>"; };
-		CDE031D02C6BA2A90026677F /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
 		CDE031D82C6BAE950026677F /* MainTransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTransactionTableViewCell.swift; sourceTree = "<group>"; };
 		FA8567D32C6EAC9A00C7A965 /* AddExpensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpensesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -176,6 +184,49 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		CD75DE0C2CA4330D008013A3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CDE031B62C6BA08B0026677F /* AppDelegate.swift */,
+				CDE031CA2C6BA1420026677F /* TabBarController.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CD75DE0D2CA43706008013A3 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				CD75DE0E2CA4371B008013A3 /* APIManager.swift */,
+				CD75DE122CA43E2D008013A3 /* NetworkingError.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		CD75DE182CA444E7008013A3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CDE031CC2C6BA1F40026677F /* CurrencyViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CD75DE192CA444EC008013A3 /* VIewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CD75DE162CA43FD5008013A3 /* CurrencyViewModel.swift */,
+			);
+			path = VIewModel;
+			sourceTree = "<group>";
+		};
+		CD75DE1A2CA444F9008013A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CD75DE102CA43791008013A3 /* CurrencyObject.swift */,
+				CD75DE142CA43E79008013A3 /* DataCurrency.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		CDA019572C6E60DE002ACF11 /* Total */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +265,8 @@
 		CDC657B62C74F62000912BBF /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				CD500A272CA1FAA0008292F5 /* IncomePersistant.swift */,
+				CDC657BB2C74F7B000912BBF /* ExpensePersistant.swift */,
 				CDC657B72C74F6E600912BBF /* ExpenseEntity+CoreDataClass.swift */,
 				CDC657B82C74F6E600912BBF /* ExpenseEntity+CoreDataProperties.swift */,
 				CD500A232CA1FA81008292F5 /* IncomeEntity+CoreDataClass.swift */,
@@ -223,12 +276,15 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		CDD283832C6CEF2300BA95F6 /* Chat */ = {
+		CDD283832C6CEF2300BA95F6 /* Currency */ = {
 			isa = PBXGroup;
 			children = (
-				CDE031CC2C6BA1F40026677F /* ChatViewController.swift */,
+				CD75DE0D2CA43706008013A3 /* Networking */,
+				CD75DE182CA444E7008013A3 /* View */,
+				CD75DE192CA444EC008013A3 /* VIewModel */,
+				CD75DE1A2CA444F9008013A3 /* Model */,
 			);
-			path = Chat;
+			path = Currency;
 			sourceTree = "<group>";
 		};
 		CDD283842C6CEF2D00BA95F6 /* Expenses */ = {
@@ -251,19 +307,12 @@
 			path = Income;
 			sourceTree = "<group>";
 		};
-		CDD283862C6CEF3C00BA95F6 /* Analysis */ = {
-			isa = PBXGroup;
-			children = (
-				CDE031D02C6BA2A90026677F /* AnalysisViewController.swift */,
-			);
-			path = Analysis;
-			sourceTree = "<group>";
-		};
 		CDD283892C6CF07D00BA95F6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				CDD283872C6CF07500BA95F6 /* TransactionObject.swift */,
 				CD1DB18F2C78E1ED008B31EF /* Categories.swift */,
+				CDA019512C6E3399002ACF11 /* TableViewSection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -304,15 +353,10 @@
 			isa = PBXGroup;
 			children = (
 				CD4601A52C94BC73002413E4 /* Basic */,
-				CDE031B62C6BA08B0026677F /* AppDelegate.swift */,
-				CDE031CA2C6BA1420026677F /* TabBarController.swift */,
-				CDA019512C6E3399002ACF11 /* TableViewSection.swift */,
-				CDC657BB2C74F7B000912BBF /* ExpensePersistant.swift */,
-				CD500A272CA1FAA0008292F5 /* IncomePersistant.swift */,
-				CDD283832C6CEF2300BA95F6 /* Chat */,
+				CDD283832C6CEF2300BA95F6 /* Currency */,
 				CDD283842C6CEF2D00BA95F6 /* Expenses */,
 				CDD283852C6CEF3500BA95F6 /* Income */,
-				CDD283862C6CEF3C00BA95F6 /* Analysis */,
+				CD75DE0C2CA4330D008013A3 /* Resources */,
 				CDC657B62C74F62000912BBF /* CoreData */,
 				CDE031BF2C6BA08C0026677F /* Assets.xcassets */,
 				CDE031C12C6BA08C0026677F /* LaunchScreen.storyboard */,
@@ -397,11 +441,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD75DE0F2CA4371B008013A3 /* APIManager.swift in Sources */,
 				CD500A202CA1F573008292F5 /* IncTransactionsViewModel.swift in Sources */,
+				CD75DE152CA43E79008013A3 /* DataCurrency.swift in Sources */,
 				CD500A222CA1F591008292F5 /* IncTransactionsViewController.swift in Sources */,
 				CD500A192CA1F4DF008292F5 /* IncomeViewModel.swift in Sources */,
 				CDC657BC2C74F7B000912BBF /* ExpensePersistant.swift in Sources */,
 				CDE031CB2C6BA1420026677F /* TabBarController.swift in Sources */,
+				CD75DE112CA43791008013A3 /* CurrencyObject.swift in Sources */,
 				CDA019522C6E3399002ACF11 /* TableViewSection.swift in Sources */,
 				FA8567D42C6EAC9A00C7A965 /* AddExpensesViewController.swift in Sources */,
 				CDD2838E2C6D049200BA95F6 /* ExpensesViewModel.swift in Sources */,
@@ -414,11 +461,12 @@
 				CDA019562C6E5E06002ACF11 /* ExpTransactionViewModel.swift in Sources */,
 				CD4601A02C9499C4002413E4 /* BasicTransactionVC.swift in Sources */,
 				CDC657B92C74F6E600912BBF /* ExpenseEntity+CoreDataClass.swift in Sources */,
-				CDE031D12C6BA2A90026677F /* AnalysisViewController.swift in Sources */,
 				CDE031BB2C6BA08B0026677F /* ExpensesViewController.swift in Sources */,
 				CD500A252CA1FA81008292F5 /* IncomeEntity+CoreDataClass.swift in Sources */,
 				CD7006632C6BDD8F00EAE0CD /* ExpensesPageViewController.swift in Sources */,
-				CDE031CD2C6BA1F40026677F /* ChatViewController.swift in Sources */,
+				CD75DE132CA43E2D008013A3 /* NetworkingError.swift in Sources */,
+				CDE031CD2C6BA1F40026677F /* CurrencyViewController.swift in Sources */,
+				CD75DE172CA43FD5008013A3 /* CurrencyViewModel.swift in Sources */,
 				CD500A262CA1FA81008292F5 /* IncomeEntity+CoreDataProperties.swift in Sources */,
 				CDD283882C6CF07500BA95F6 /* TransactionObject.swift in Sources */,
 				CD500A282CA1FAA0008292F5 /* IncomePersistant.swift in Sources */,

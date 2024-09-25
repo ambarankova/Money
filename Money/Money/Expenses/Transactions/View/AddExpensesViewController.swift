@@ -64,6 +64,9 @@ private extension AddExpensesViewController {
         let date = datePicker.date
         
         let expense = TransactionObject(category: category, plan: amount, fact: amount, date: date)
+        
+        NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
+        
         delegate?.didAddExpense(expense)
         dismiss(animated: true, completion: nil)
     }

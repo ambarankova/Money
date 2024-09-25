@@ -11,7 +11,7 @@ protocol MainTransactionViewModelProtocol {
     var sections: [TableViewSection] { get set }
     var reloadTable: (() -> Void)? { get set }
     var count: Int { get }
-    func getExpense()
+    func getTransaction()
     func changePlan(_ newPlan: Float, _ category: String)
     func clearAll()
 }
@@ -19,21 +19,21 @@ protocol MainTransactionViewModelProtocol {
 class BasicVM: MainTransactionViewModelProtocol {
     var reloadTable: (() -> Void)?
     var count = 0
-    var sections: [TableViewSection] = [] {
-        didSet {
-            reloadTable?()
-        }
-    }
+    var sections: [TableViewSection] = [] 
+//        didSet {
+//            reloadTable?()
+//        }
+//    }
     var centralSection = TableViewSection(items: [])
     var transactions: [TransactionObject] = []
     
     
     init() {
         categorySetupTable()
-        getExpense()
+        getTransaction()
     }
     
-    func getExpense() {
+    func getTransaction() {
         sections.removeAll()
 //        let transactions = ExpensePersistant.fetchAll()
         
