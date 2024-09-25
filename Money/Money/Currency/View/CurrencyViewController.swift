@@ -13,7 +13,7 @@ final class CurrencyViewController: UIViewController {
     private lazy var dollarTextLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "today 1 dollar costs"
+        label.text = Constants.Texts.dollarText
         label.font = .systemFont(ofSize: 15)
         label.textAlignment = .center
         
@@ -22,8 +22,6 @@ final class CurrencyViewController: UIViewController {
     
     private lazy var dollarLabel: UILabel = {
         let label = UILabel()
-        let separator = "."
-        
         
         label.font = .boldSystemFont(ofSize: 80)
         label.textAlignment = .center
@@ -34,7 +32,7 @@ final class CurrencyViewController: UIViewController {
     private lazy var rubleTextLabel1: UILabel = {
         let label = UILabel()
         
-        label.text = "rubles"
+        label.text = Constants.Texts.rubles
         label.font = .systemFont(ofSize: 15)
         label.textAlignment = .center
         
@@ -44,6 +42,7 @@ final class CurrencyViewController: UIViewController {
     private lazy var euroTextLabel: UILabel = {
         let label = UILabel()
 
+        label.text = Constants.Texts.euroText
         label.font = .systemFont(ofSize: 15)
         label.textAlignment = .center
         
@@ -62,7 +61,7 @@ final class CurrencyViewController: UIViewController {
     private lazy var rubleTextLabel2: UILabel = {
         let label = UILabel()
         
-        label.text = "rubles"
+        label.text = Constants.Texts.rubles
         label.font = .systemFont(ofSize: 15)
         label.textAlignment = .center
         
@@ -94,7 +93,7 @@ final class CurrencyViewController: UIViewController {
 }
 
 // MARK: - Private
-extension CurrencyViewController {
+private extension CurrencyViewController {
     func setupUI() {
         [dollarLabel, dollarTextLabel, euroLabel, euroTextLabel, rubleTextLabel1, rubleTextLabel2].forEach { view.addSubview($0) }
         view.backgroundColor = .white
@@ -142,6 +141,19 @@ extension CurrencyViewController {
         
         dollarLabel.text = String(viewModel?.dollarPrice[..<endIndex] ?? "")
         euroLabel.text = String(viewModel?.euroPrice[..<endIndex] ?? "")
-        
     }
 }
+
+// MARK: - UI constants
+private extension CurrencyViewController {
+    enum Constants {
+        enum Texts {
+            static let rubles = "rubles"
+            static let dollarText = "today 1 dollar costs"
+            static let euroText = "today 1 euro costs"
+        }
+        enum Sizes {
+        }
+    }
+}
+

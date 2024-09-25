@@ -5,30 +5,32 @@
 //  Created by Анастасия Ахановская on 15.08.2024.
 //
 
+import SnapKit
 import UIKit
 
 final class TransactionTableViewCell: UITableViewCell {
     // MARK: - GUI Variables
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
+        
         view.axis = .horizontal
         view.distribution = .fillEqually
         view.alignment = .center
         view.spacing = 5
+        
         return view
     }()
     
-    private lazy var categoryLabel = createLabel(font: .boldSystemFont(ofSize: textSize),
+    private lazy var categoryLabel = createLabel(font: .boldSystemFont(ofSize: Constants.Sizes.textSize),
                                                  aligment: .left,
                                                  text: "Food")
-    private lazy var factLabel = createLabel(font: .systemFont(ofSize: textSize),
+    private lazy var factLabel = createLabel(font: .systemFont(ofSize: Constants.Sizes.textSize),
                                              text: "100")
-    private lazy var dateLabel = createLabel(font: .systemFont(ofSize: textSize),
+    private lazy var dateLabel = createLabel(font: .systemFont(ofSize: Constants.Sizes.textSize),
                                              text: "20 apr 24")
     
     // MARK: - Properties
     static let reuseID = "TransactionTableViewCell"
-    private let textSize: CGFloat = 17
     private let dateFormatter = DateFormatter()
     
     // MARK: - Initializations
@@ -37,20 +39,20 @@ final class TransactionTableViewCell: UITableViewCell {
         
         setupUI()
     }
-
+    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - Methods
     func configure(with transaction: TransactionObject) {
         categoryLabel.text = transaction.category
-
-        let defaultFactText = "Fact"
-        let defaultDateText = "Date"
+        
+        let defaultFactText = Constants.Texts.defautFact
+        let defaultDateText = Constants.Texts.defaultPlan
         dateFormatter.dateFormat = "dd MMM yyyy"
-
+        
         if let fact = transaction.fact {
             factLabel.text = String(fact)
         } else {
@@ -72,14 +74,14 @@ private extension TransactionTableViewCell {
         [categoryLabel, factLabel, dateLabel].forEach { stackView.addArrangedSubview($0) }
         setupConstraints()
     }
-
+    
     func setupConstraints() {
         stackView.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().offset(8)
             make.bottom.trailing.equalToSuperview().offset(-8)
         }
     }
-
+    
     func createLabel(font: UIFont?,
                      aligment: NSTextAlignment? = nil,
                      color: UIColor? = nil,
@@ -91,5 +93,18 @@ private extension TransactionTableViewCell {
         label.textColor = color
         label.textAlignment = aligment ?? .center
         return label
+    }
+}
+
+// MARK: - UI constants
+private extension TransactionTableViewCell {
+    enum Constants {
+        enum Texts {
+            static let defaultPlan = "Plan"
+            static let defautFact = "Fact"
+        }
+        enum Sizes {
+            static let textSize: CGFloat = 17
+        }
     }
 }

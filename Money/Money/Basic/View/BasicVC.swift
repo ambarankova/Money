@@ -10,69 +10,65 @@ import UIKit
 
 class BasicVC: UIViewController {
     // MARK: - GUI Variables
-    let table = UITableView()
-    
     var countLabel: UILabel = {
         let label = UILabel()
+        
         label.text = Constants.Texts.countLabelText
         label.font = .boldSystemFont(ofSize: 40)
         label.textAlignment = .center
+        
         return label
     }()
     
     var monthLabel: UILabel = {
         let label = UILabel()
-        label.text = Constants.Texts.monthLabelText
+        
+        label.text = Constants.Texts.plusMonthLabelText
         label.font = .systemFont(ofSize: 20)
         label.textAlignment = .center
+        
         return label
     }()
     
     let clearButton: UIButton = {
         let button = UIButton()
+        
         button.setTitle(Constants.Texts.buttonTitle, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 15)
-        button.backgroundColor = .lightGray
         button.titleLabel?.textAlignment = .center
-        button.layer.cornerRadius = CGFloat(Constants.Sizes.buttonHeight / 2)
         button.titleLabel?.numberOfLines = 2
+        
+        button.backgroundColor = .lightGray
+        button.layer.cornerRadius = CGFloat(Constants.Sizes.buttonHeight / 2)
+        
         button.addTarget(nil, action: #selector(clearButtonTapped), for: .touchUpInside)
+        
         return button
     }()
+    
+    let table = UITableView()
     
     // MARK: - Properties
     var viewModel: MainTransactionViewModelProtocol?
     
     // MARK: - Life Cycle
-    init(viewModel: MainTransactionViewModelProtocol) {
-        self.viewModel = viewModel
-        
-        super.init(nibName: nil, bundle: nil)
-        
-        let countInt = viewModel.count
-        countLabel.text = String(countInt)
-
-        if countInt < 0 {
-            monthLabel.text = "keep an eye on the budget"
-        }
-        
-        self.setupViewModel()
-    }
+        init(viewModel: MainTransactionViewModelProtocol) {
+            self.viewModel = viewModel
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-    }
+            super.init(nibName: nil, bundle: nil)
+    
+            self.setupViewModel()
+        }
+    
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupTableView()
         setupUI()
+        setupTableView()
         registerObserver()
     }
     
@@ -83,31 +79,14 @@ class BasicVC: UIViewController {
 
 // MARK: - Private
 extension BasicVC {
-        @objc func clearButtonTapped() {
-    //        let addExpenseVC = AddExpensesViewController()
-    //        addExpenseVC.delegate = self
-    //        present(addExpenseVC, animated: true, completion: nil)
+        private func setupViewModel() {
+            viewModel?.reloadTable = { [weak self] in
+                self?.table.reloadData()
+            }
         }
-
-    //// MARK: - AddExpensesViewControllerDelegate
-    //extension BasicTransactionVC: AddExpensesViewControllerDelegate {
-    //    func didAddExpense(_ expense: TransactionObject) {
-    //        viewModel?.addExpenses(expense)
-    //    }
-    //}
-
-    private func setupViewModel() {
-        viewModel?.reloadTable = { [weak self] in
-            self?.table.reloadData()
-        }
-    }
     
     private func registerObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateData), name: NSNotification.Name("Update"), object: nil)
-    }
-    
-    @objc private func updateData() {
-        table.reloadData()
     }
     
     private func setupTableView() {
@@ -116,14 +95,21 @@ extension BasicVC {
         table.delegate = self
     }
     
-    func setupUI() {
+    private func setupUI() {
         [countLabel, monthLabel, table, clearButton].forEach { view.addSubview($0) }
         view.backgroundColor = .white
+        
+        guard let countInt = viewModel?.count else { return }
+        countLabel.text = String(countInt)
+        
+        if countInt < 0 {
+            monthLabel.text = Constants.Texts.minusMonthLabelText
+        }
         
         setupConstraints()
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         countLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
@@ -146,11 +132,42 @@ extension BasicVC {
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(80)
         }
     }
+    
+    @objc func clearButtonTapped() { }
+    
+    @objc private func updateData() {
+        table.reloadData()
+    }
 }
 
 // MARK: - UITableViewDelegate
 extension BasicVC: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section != 0 && (indexPath.section + 1) != viewModel?.sections.count {
+            guard let category = viewModel?.sections[indexPath.section].items[indexPath.row].category else { return }
+            
+            let alertController = UIAlertController(title: Constants.Texts.alertTitle, message: nil, preferredStyle: .alert)
+            
+            alertController.addTextField { (textField) in
+                textField.placeholder = Constants.Texts.placeholderText
+                textField.keyboardType = .numberPad
+            }
+            
+            let confirmAction = UIAlertAction(title: Constants.Texts.confirmationAction, style: .default) { _ in
+                if let newPlanText = alertController.textFields?.first?.text,
+                   let newPlan = Float(newPlanText) {
+                    self.viewModel?.changePlan(newPlan, category)
+                }
+            }
+            
+            let cancelAction = UIAlertAction(title: Constants.Texts.cancelAction, style: .cancel, handler: nil)
+            
+            alertController.addAction(confirmAction)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+        }
+    }
 }
 
 // MARK: - UITableViewDataSourse
@@ -169,8 +186,13 @@ private extension BasicVC {
     enum Constants {
         enum Texts {
             static let countLabelText = "Count"
-            static let monthLabelText = "keep it up!"
-            static let buttonTitle = "new month"
+            static let plusMonthLabelText = "keep it up!"
+            static let minusMonthLabelText = "keep an eye on the budget"
+            static let buttonTitle = "New month"
+            static let alertTitle = "Change plan"
+            static let placeholderText = "New plan value"
+            static let confirmationAction = "OK"
+            static let cancelAction = "Cancel"
         }
         enum Sizes {
             static let buttonHeight: CGFloat = 70.0

@@ -16,8 +16,9 @@ final class ExpTransactionViewModel: BasicTransactionVM {
         set { }
     }
     
+    // MARK: - Methods
     override func addExpenses(_ expenses: TransactionObject) {
-//        NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
         
         ExpensePersistant.save(expenses)
         getTransactions()

@@ -16,6 +16,7 @@ final class ExpensesViewModel: BasicVM {
         set { }
     }
     
+    // MARK: - Methods
     override func clearAll() {
         ExpensePersistant.clearCoreData()
     }
@@ -24,7 +25,7 @@ final class ExpensesViewModel: BasicVM {
         for category in Categories().categoriesExpense {
             let plan = UserDefaults.standard.float(forKey: category)
             
-            centralSection.items.append(TransactionObject(category: category, plan: plan, fact: 0, date: nil))
+            centralSection.items.append(TransactionObject(category: category, date: nil, plan: plan, fact: 0))
         }
     }
     

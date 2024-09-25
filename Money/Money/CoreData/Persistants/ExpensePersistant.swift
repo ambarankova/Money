@@ -1,25 +1,26 @@
 //
-//  IncomePersistant.swift
+//  ExpensePersistant.swift
 //  Money
 //
-//  Created by Анастасия Ахановская on 23.09.2024.
+//  Created by Анастасия Ахановская on 20.08.2024.
 //
 
 import CoreData
 import Foundation
+import UIKit
 
-final class IncomePersistant {
+final class ExpensePersistant {
     private static let context = AppDelegate.persistantContainer.viewContext
     
     static func save(_ transaction: TransactionObject) {
-        var entity: IncomeEntity?
+        var entity: ExpenseEntity?
         
         if let ent = getEntity(for: transaction) {
             entity = ent
         } else {
-            guard let description = NSEntityDescription.entity(forEntityName: "IncomeEntity",
+            guard let description = NSEntityDescription.entity(forEntityName: "ExpenseEntity",
                                                                in: context) else { return }
-            entity = IncomeEntity(entity: description,
+            entity = ExpenseEntity(entity: description,
                                     insertInto: context)
         }
         
@@ -37,7 +38,7 @@ final class IncomePersistant {
     }
     
     static func fetchAll() -> [TransactionObject] {
-        let request = IncomeEntity.fetchRequest()
+        let request = ExpenseEntity.fetchRequest()
         
         do {
             let objects = try context.fetch(request)
@@ -49,12 +50,11 @@ final class IncomePersistant {
     }
     
     // MARK: - Private Methods
-    private static func convert(entities: [IncomeEntity]) -> [TransactionObject] {
+    private static func convert(entities: [ExpenseEntity]) -> [TransactionObject] {
         let transactions = entities.map {
             TransactionObject(category: $0.category ?? "",
-                           plan: nil,
-                           fact: $0.amount,
-                           date: $0.date ?? Date())
+                              date: $0.date ?? Date(), plan: nil,
+                              fact: $0.amount)
         }
         return transactions
     }
@@ -63,8 +63,8 @@ final class IncomePersistant {
         NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
     }
     
-    private static func getEntity(for transaction: TransactionObject) -> IncomeEntity? {
-        let request = IncomeEntity.fetchRequest()
+    private static func getEntity(for transaction: TransactionObject) -> ExpenseEntity? {
+        let request = ExpenseEntity.fetchRequest()
         request.predicate = NSPredicate(format: "category == %@ AND date == %@", transaction.category, transaction.date as? NSDate ?? NSDate())
     
         do {
@@ -84,5 +84,30 @@ final class IncomePersistant {
             debugPrint("Save note error: \(error)")
         }
     }
-}
+    
+    static func clearCoreData() {
 
+        
+         let context = AppDelegate.persistantContainer.viewContext
+        
+        // Получаем все сущности из Managed Object Model
+        let entityNames = AppDelegate.persistantContainer.managedObjectModel.entities.map({ $0.name! })
+        
+        for entityName in entityNames {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            
+            do {
+                try context.execute(batchDeleteRequest)
+            } catch {
+                print("Ошибка при удалении объектов для сущности \(entityName): \(error)")
+            }
+        }
+        
+        do {
+            try context.save()  // Сохраняем изменения
+        } catch {
+            print("Ошибка при сохранении контекста: \(error)")
+        }
+    }
+}

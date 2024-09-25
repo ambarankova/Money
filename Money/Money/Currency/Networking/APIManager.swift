@@ -29,8 +29,7 @@ final class ApiManager {
         if let error = error {
             completion(.failure(NetworkingError.networkingError(error)))
         } else if let data = data {
-//            let json = try? JSONSerialization.jsonObject(with: data, options: [])
-//            
+
             do {
                 let model = try JSONDecoder().decode(DataCurrency.self,
                                                      from: data)

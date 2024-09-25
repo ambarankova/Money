@@ -20,7 +20,7 @@ final class IncomeViewModel: BasicVM {
         for category in Categories().categoriesIncome {
             let plan = UserDefaults.standard.float(forKey: category)
             
-            centralSection.items.append(TransactionObject(category: category, plan: plan, fact: 0, date: nil))
+            centralSection.items.append(TransactionObject(category: category, date: nil, plan: plan, fact: 0))
         }
     }
     

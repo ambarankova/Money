@@ -103,6 +103,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD0FB4802CA46DFF0003DD37 /* Persistants */ = {
+			isa = PBXGroup;
+			children = (
+				CD500A272CA1FAA0008292F5 /* IncomePersistant.swift */,
+				CDC657BB2C74F7B000912BBF /* ExpensePersistant.swift */,
+			);
+			path = Persistants;
+			sourceTree = "<group>";
+		};
 		CD4601A52C94BC73002413E4 /* Basic */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,8 +274,7 @@
 		CDC657B62C74F62000912BBF /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				CD500A272CA1FAA0008292F5 /* IncomePersistant.swift */,
-				CDC657BB2C74F7B000912BBF /* ExpensePersistant.swift */,
+				CD0FB4802CA46DFF0003DD37 /* Persistants */,
 				CDC657B72C74F6E600912BBF /* ExpenseEntity+CoreDataClass.swift */,
 				CDC657B82C74F6E600912BBF /* ExpenseEntity+CoreDataProperties.swift */,
 				CD500A232CA1FA81008292F5 /* IncomeEntity+CoreDataClass.swift */,

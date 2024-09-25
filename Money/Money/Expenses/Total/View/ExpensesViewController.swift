@@ -9,38 +9,11 @@ import SnapKit
 import UIKit
 
 final class ExpensesViewController: BasicVC {
-        @objc override func clearButtonTapped() {
-            viewModel?.clearAll()
-        }
-    
-    // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section != 0 && (indexPath.section + 1) != viewModel?.sections.count {
-            guard let category = viewModel?.sections[indexPath.section].items[indexPath.row].category else { return }
-            
-            let alertController = UIAlertController(title: "Change plan", message: nil, preferredStyle: .alert)
-            
-            alertController.addTextField { (textField) in
-                textField.placeholder = "New plan value"
-                textField.keyboardType = .numberPad
-            }
-            
-            let confirmAction = UIAlertAction(title: "OK", style: .default) { _ in
-                if let newPlanText = alertController.textFields?.first?.text,
-                   let newPlan = Float(newPlanText) {
-                    self.viewModel?.changePlan(newPlan, category)
-                }
-            }
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            
-            alertController.addAction(confirmAction)
-            alertController.addAction(cancelAction)
-            
-            present(alertController, animated: true, completion: nil)
-        }
+    // MARK: - Methods
+    @objc override func clearButtonTapped() {
+        viewModel?.clearAll()
     }
-    
+   
     // MARK: - UITableViewDataSourse
     func numberOfSections(in tableView: UITableView) -> Int {
         viewModel?.sections.count ?? 0

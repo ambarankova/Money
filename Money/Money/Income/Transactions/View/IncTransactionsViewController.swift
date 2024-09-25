@@ -8,7 +8,17 @@
 import SnapKit
 import UIKit
 
-final class IncTransactionsViewController: BasicTransactionVC { }
+final class IncTransactionsViewController: BasicTransactionVC {
+    // MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let transaction = viewModel?.sections[indexPath.section].items[indexPath.row] as? TransactionObject else { return nil}
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (action, view, success) in
+            print("Delete action")
+            IncomePersistant.delete(transaction)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+}
 // MARK: - Private
 extension IncTransactionsViewController {
     @objc override func addButtonTapped() {

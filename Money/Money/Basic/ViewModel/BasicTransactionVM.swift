@@ -9,15 +9,14 @@ import Foundation
 
 protocol TransactionViewModelProtocol {
     var sections: [TableViewSection] { get }
+    var reloadTable: (() -> Void)? { get set }
+    
+    func getTransactions()
     func addExpenses(_ expenses: TransactionObject)
     func addIncome(_ income: TransactionObject)
-    func getTransactions()
-    var reloadTable: (() -> Void)? { get set }
 }
 
 class BasicTransactionVM: TransactionViewModelProtocol {
-    var reloadTable: (() -> Void)?
-    
     private let dateFormatter = DateFormatter()
     private(set) var sections: [TableViewSection] = [] {
         didSet {
@@ -27,6 +26,8 @@ class BasicTransactionVM: TransactionViewModelProtocol {
     private var lastSection = TableViewSection(items: [])
     var transactions: [TransactionObject] = []
     
+    var reloadTable: (() -> Void)?
+    
     init() {
         initialSetupTable()
         getTransactions()
@@ -34,7 +35,6 @@ class BasicTransactionVM: TransactionViewModelProtocol {
     
     func getTransactions() {
         sections.removeAll()
-//        let transactions = ExpensePersistant.fetchAll()
         
         let groupedObjects = transactions.reduce(into: [Date: [TransactionObject]]()) { result, transactions in
             let date = Calendar.current.startOfDay(for: transactions.date ?? Date())
@@ -48,26 +48,25 @@ class BasicTransactionVM: TransactionViewModelProtocol {
             sections.append(TableViewSection(items: groupedObjects[key] ?? []))
         }
     }
-
-    func addExpenses(_ expenses: TransactionObject) {
-//        NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
-//        
-//        ExpensePersistant.save(expenses)
-//        getTransactions()
-    }
     
-    func addIncome(_ income: TransactionObject) {
-//        NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
-//
-//        IncomePersistant.save(income)
-//        getTransactions()
-    }
+    func addExpenses(_ expenses: TransactionObject) { }
+    
+    func addIncome(_ income: TransactionObject) { }
     
     private func initialSetupTable() {
         sections = [
-            TableViewSection(items: [TransactionObject(category: "Category", plan: nil, fact: nil, date: nil)])
+            TableViewSection(items: [TransactionObject(category: Constants.Texts.category, date: nil, plan: nil, fact: nil)])
         ]
     }
 }
 
-
+// MARK: - UI constants
+private extension BasicTransactionVM {
+    enum Constants {
+        enum Texts {
+            static let category = "Category"
+        }
+        enum Sizes {
+        }
+    }
+}

@@ -13,27 +13,23 @@ protocol AddIncomeViewControllerDelegate: AnyObject {
 }
 
 final class AddIncomeViewController: UIViewController {
-
-    // MARK: - Properties
-    let categories = Categories().categoriesIncome
-    private var selectedCategory: String?
-    private let dateFormatter = DateFormatter()
-
-    weak var delegate: AddIncomeViewControllerDelegate?
-
     // MARK: - GUI Elements
     private let categoryTextField: UITextField = {
         let textField = UITextField()
+        
         textField.placeholder = "Select Category"
         textField.borderStyle = .roundedRect
+        
         return textField
     }()
 
     private let amountTextField: UITextField = {
         let textField = UITextField()
+        
         textField.placeholder = "Amount"
         textField.borderStyle = .roundedRect
         textField.keyboardType = .decimalPad
+        
         return textField
     }()
     
@@ -47,16 +43,26 @@ final class AddIncomeViewController: UIViewController {
 
     private let saveButton: UIButton = {
         let button = UIButton(type: .system)
+        
         button.setTitle("Save", for: .normal)
         button.addTarget(nil, action: #selector(saveButtonTapped), for: .touchUpInside)
+        
         return button
     }()
 
     private let categoryPickerView = UIPickerView()
+    
+    // MARK: - Properties
+    private let categories = Categories().categoriesIncome
+    private var selectedCategory: String?
+    private let dateFormatter = DateFormatter()
+
+    weak var delegate: AddIncomeViewControllerDelegate?
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupUI()
         setupPickerView()
     }
@@ -70,7 +76,7 @@ private extension AddIncomeViewController {
               let amount = Float(amountText) else { return }
         let date = datePicker.date
         
-        let income = TransactionObject(category: category, plan: amount, fact: amount, date: date)
+        let income = TransactionObject(category: category, date: date, plan: amount, fact: amount)
         delegate?.didAddIncome(income)
         dismiss(animated: true, completion: nil)
     }

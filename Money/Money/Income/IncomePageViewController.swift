@@ -14,7 +14,7 @@ final class IncomePageViewController: UIPageViewController {
     
     // MARK: - Properties
     var pages: [UIViewController] = [IncomeViewController(viewModel: IncomeViewModel()), IncTransactionsViewController(viewModel: IncTransactionsViewModel())]
-
+    
     // MARK: - Life Cycle
     init() {
         super.init(transitionStyle: .scroll,
@@ -65,69 +65,32 @@ extension IncomePageViewController {
     }
 }
 
-//    // MARK: - Properties
-//    override var pages: [UIViewController] {
-//        get {
-//            return [ExpensesViewController(viewModel: ExpensesViewModel()),
-//                    ExpTransactionViewController(viewModel: ExpTransactionViewModel())]
-//        }
-//        set { }
-//    }
-//
-//    // MARK: - Methods
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        setViewControllers([pages[0]], direction: .forward, animated: true, completion: nil)
-//    }
-    
 // MARK: - UIPageViewControllerDelegate
-    extension IncomePageViewController: UIPageViewControllerDelegate {
-        func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-            guard
-                let visibleViewController = pageViewController.viewControllers?.first,
-                //            let expensesViewController = visibleViewController as? ExpensesViewController,
-                let index = pages.firstIndex(of: visibleViewController)
-            else {
-                return
-            }
-            pageControl.currentPage = index
+extension IncomePageViewController: UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        guard
+            let visibleViewController = pageViewController.viewControllers?.first,
+            let index = pages.firstIndex(of: visibleViewController)
+        else {
+            return
         }
+        pageControl.currentPage = index
     }
+}
 
 // MARK: - UIPageViewControllerDataSource
 extension IncomePageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-//        guard
-//            let expensesViewController = viewController as? ExpensesViewController,
-//            let index = pages.firstIndex(of: expensesViewController),
-//            index > 0
-//        else {
-//            return nil
-//        }
-//        return pages[index - 1]
-        
         guard let currentIndex = pages.firstIndex(of: viewController), currentIndex > 0 else {
-                    return nil
-                }
-                return pages[currentIndex - 1]
+            return nil
+        }
+        return pages[currentIndex - 1]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-//        print(pages.count)
-//        guard
-//            let expensesViewController = viewController as? ExpensesViewController,
-//            let index = pages.firstIndex(of: expensesViewController),
-//            index < pages.count - 1
-//
-//        else {
-//            return nil
-//        }
-//        return pages[index + 1]
-        
         guard let currentIndex = pages.firstIndex(of: viewController), currentIndex < pages.count - 1 else {
-                    return nil
-                }
-                return pages[currentIndex + 1]
+            return nil
+        }
+        return pages[currentIndex + 1]
     }
 }

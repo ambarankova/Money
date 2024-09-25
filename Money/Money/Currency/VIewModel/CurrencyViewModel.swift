@@ -8,21 +8,25 @@
 import Foundation
 
 protocol CurrencyViewModelProtocol {
-    func loadData()
     var showError: ((String) -> Void)? { get set }
     var dollarPrice: String { get }
     var euroPrice: String { get }
+    
+    func loadData()
 }
 
 final class CurrencyViewModel: CurrencyViewModelProtocol {
+    // MARK: - Properties
     var showError: ((String) -> Void)?
     var dollarPrice: String = ""
     var euroPrice: String = ""
     
+    // MARK: - Initialization
     init() {
         loadData()
     }
-    
+
+    // MARK: - Methods
     func loadData() {
         ApiManager.getNews() { [weak self] result in
             self?.handleResult(result)
@@ -43,6 +47,6 @@ final class CurrencyViewModel: CurrencyViewModelProtocol {
     func convertToLabel(_ currency: CurrencyObject) {
         dollarPrice = currency.USDRUB
         euroPrice = currency.EURRUB
-        }
     }
+}
 
