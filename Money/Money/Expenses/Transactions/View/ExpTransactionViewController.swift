@@ -13,15 +13,16 @@ protocol ExpTransactionViewControllerDelegate: AnyObject {
 }
 
 final class ExpTransactionViewController: BasicTransactionVC {
-
+    // MARK: - Properties
     weak var delegate: ExpTransactionViewControllerDelegate?
-
+    
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard let transaction = viewModel?.sections[indexPath.section].items[indexPath.row] as? TransactionObject else { return nil}
         let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (action, view, success) in
             print("Delete action")
             ExpensePersistant.delete(transaction)
+            self.delegate?.transactionWasAdded()
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }

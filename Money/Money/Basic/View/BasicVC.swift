@@ -79,11 +79,11 @@ class BasicVC: UIViewController {
 
 // MARK: - Private
 extension BasicVC {
-        private func setupViewModel() {
-            viewModel?.reloadTable = { [weak self] in
+    private func setupViewModel() {
+        viewModel?.reloadTable = { [weak self] in
                 self?.table.reloadData()
             }
-        }
+    }
     
     private func registerObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateData), name: NSNotification.Name("Update"), object: nil)
@@ -99,13 +99,7 @@ extension BasicVC {
         [countLabel, monthLabel, table, clearButton].forEach { view.addSubview($0) }
         view.backgroundColor = .white
         
-        guard let countInt = viewModel?.count else { return }
-        countLabel.text = String(countInt)
-        
-        if countInt < 0 {
-            monthLabel.text = Constants.Texts.minusMonthLabelText
-        }
-        
+        setupCountLabel()
         setupConstraints()
     }
     
@@ -130,6 +124,15 @@ extension BasicVC {
             make.width.height.equalTo(Constants.Sizes.buttonHeight)
             make.trailing.equalToSuperview().inset(40)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(80)
+        }
+    }
+    
+    private func setupCountLabel() {
+        guard let countInt = viewModel?.count else { return }
+        countLabel.text = String(countInt)
+        
+        if countInt < 0 {
+            monthLabel.text = Constants.Texts.minusMonthLabelText
         }
     }
     
@@ -158,6 +161,8 @@ extension BasicVC: UITableViewDelegate {
                    let newPlan = Float(newPlanText) {
                     self.viewModel?.changePlan(newPlan, category)
                 }
+                self.viewModel?.categorySetupTable()
+                tableView.reloadData()
             }
             
             let cancelAction = UIAlertAction(title: Constants.Texts.cancelAction, style: .cancel, handler: nil)
@@ -172,12 +177,24 @@ extension BasicVC: UITableViewDelegate {
 
 // MARK: - UITableViewDataSourse
 extension BasicVC: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        viewModel?.sections.count ?? 0
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
+        viewModel?.sections[section].items.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTransactionTableViewCell.reuseID,
+                                                       for: indexPath) as? MainTransactionTableViewCell else {
+            return UITableViewCell()
+        }
+        if let expense = viewModel?.sections[indexPath.section].items[indexPath.row]
+            as? TransactionObject {
+            cell.configure(with: expense)
+        }
+        return cell
     }
 }
 

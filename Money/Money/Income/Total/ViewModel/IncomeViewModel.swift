@@ -16,6 +16,11 @@ final class IncomeViewModel: BasicVM {
         set { }
     }
     
+    // MARK: - Methods
+    override func clearAll() {
+        IncomePersistant.clearCoreData()
+    }
+    
     override func categorySetupTable() {
         for category in Categories().categoriesIncome {
             let plan = UserDefaults.standard.float(forKey: category)

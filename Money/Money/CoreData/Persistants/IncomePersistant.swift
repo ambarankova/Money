@@ -83,5 +83,21 @@ final class IncomePersistant {
             debugPrint("Save note error: \(error)")
         }
     }
+    
+    static func clearCoreData() {
+        let entityNames = AppDelegate.persistantContainer.managedObjectModel.entities.map({ $0.name! })
+        
+        for entityName in entityNames {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            
+            do {
+                try context.execute(batchDeleteRequest)
+            } catch let error {
+                print("Deleting transactions error: \(error)")
+            }
+        }
+        saveContext()
+    }
 }
 

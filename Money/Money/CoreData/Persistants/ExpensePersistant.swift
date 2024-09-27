@@ -21,13 +21,13 @@ final class ExpensePersistant {
             guard let description = NSEntityDescription.entity(forEntityName: "ExpenseEntity",
                                                                in: context) else { return }
             entity = ExpenseEntity(entity: description,
-                                    insertInto: context)
+                                   insertInto: context)
         }
         
         entity?.category = transaction.category
         entity?.amount = transaction.fact ?? 0
         entity?.date = transaction.date
-
+        
         saveContext()
     }
     
@@ -44,7 +44,7 @@ final class ExpensePersistant {
             let objects = try context.fetch(request)
             return convert(entities: objects)
         } catch let error {
-            debugPrint("Fetch notes error: \(error)")
+            debugPrint("Fetch transactions error: \(error)")
             return []
         }
     }
@@ -66,12 +66,12 @@ final class ExpensePersistant {
     private static func getEntity(for transaction: TransactionObject) -> ExpenseEntity? {
         let request = ExpenseEntity.fetchRequest()
         request.predicate = NSPredicate(format: "category == %@ AND date == %@", transaction.category, transaction.date as? NSDate ?? NSDate())
-    
+        
         do {
             let objects = try context.fetch(request)
             return objects.first
         } catch let error {
-            debugPrint("Fetch notes error: \(error)")
+            debugPrint("Fetch transaction error: \(error)")
             return nil
         }
     }
@@ -81,16 +81,11 @@ final class ExpensePersistant {
             try context.save()
             postNotification()
         } catch let error {
-            debugPrint("Save note error: \(error)")
+            debugPrint("Save transaction error: \(error)")
         }
     }
     
     static func clearCoreData() {
-
-        
-         let context = AppDelegate.persistantContainer.viewContext
-        
-        // Получаем все сущности из Managed Object Model
         let entityNames = AppDelegate.persistantContainer.managedObjectModel.entities.map({ $0.name! })
         
         for entityName in entityNames {
@@ -99,15 +94,10 @@ final class ExpensePersistant {
             
             do {
                 try context.execute(batchDeleteRequest)
-            } catch {
-                print("Ошибка при удалении объектов для сущности \(entityName): \(error)")
+            } catch let error {
+                print("Deleting transactions error: \(error)")
             }
         }
-        
-        do {
-            try context.save()  // Сохраняем изменения
-        } catch {
-            print("Ошибка при сохранении контекста: \(error)")
-        }
+        saveContext()
     }
 }

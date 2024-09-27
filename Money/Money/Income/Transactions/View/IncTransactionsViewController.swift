@@ -8,7 +8,14 @@
 import SnapKit
 import UIKit
 
+protocol IncTransactionViewControllerDelegate: AnyObject {
+    func transactionWasAdded()
+}
+
 final class IncTransactionsViewController: BasicTransactionVC {
+    // MARK: - Properties
+    weak var delegate: IncTransactionViewControllerDelegate?
+    
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard let transaction = viewModel?.sections[indexPath.section].items[indexPath.row] as? TransactionObject else { return nil}
@@ -32,5 +39,6 @@ extension IncTransactionsViewController {
 extension IncTransactionsViewController: AddIncomeViewControllerDelegate {
     func didAddIncome(_ income: TransactionObject) {
         viewModel?.addIncome(income)
+        delegate?.transactionWasAdded()
     }
 }

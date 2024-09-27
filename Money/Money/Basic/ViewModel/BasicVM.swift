@@ -14,6 +14,7 @@ protocol MainTransactionViewModelProtocol {
     
     func getTransaction()
     func clearAll()
+    func categorySetupTable()
     func changePlan(_ newPlan: Float, _ category: String)
 }
 
@@ -49,16 +50,6 @@ class BasicVM: MainTransactionViewModelProtocol {
         initialSetupTable()
     }
     
-    func clearAll() { }
-    
-    func changePlan(_ newPlan: Float, _ category: String) {
-        UserDefaults.standard.set(newPlan, forKey: category)
-    }
-    
-    func categorySetupTable() { }
-    
-    func countTotal() { }
-    
     func initialSetupTable() {
         let totalPlan = centralSection.items.reduce(0) { $0 + ($1.plan ?? 0) }
         let totalFact = centralSection.items.reduce(0) { $0 + ($1.fact ?? 0) }
@@ -72,15 +63,15 @@ class BasicVM: MainTransactionViewModelProtocol {
         countTotal()
     }
     
-//    private func setMocks() {
-//        centralSection = TableViewSection(items:
-//                                            [TransactionObject(category: "Transport",
-//                                                               date: Date(), plan: 2000,
-//                                                               fact: 2000),
-//                                             TransactionObject(category: "Beauty",
-//                                                               date: Date(), plan: 5000,
-//                                                               fact: 1000)])
-//    }
+    func changePlan(_ newPlan: Float, _ category: String) {
+        UserDefaults.standard.set(newPlan, forKey: category)
+    }
+    
+    func clearAll() { }
+    
+    func categorySetupTable() { }
+    
+    func countTotal() { }
 }
 
 // MARK: - UI constants
