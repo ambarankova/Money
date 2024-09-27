@@ -9,7 +9,7 @@ import SnapKit
 import UIKit
 
 protocol IncTransactionViewControllerDelegate: AnyObject {
-    func transactionWasAdded()
+    func transactionAdded()
 }
 
 final class IncTransactionsViewController: BasicTransactionVC {
@@ -22,6 +22,7 @@ final class IncTransactionsViewController: BasicTransactionVC {
         let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (action, view, success) in
             print("Delete action")
             IncomePersistant.delete(transaction)
+            self.delegate?.transactionAdded()
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
@@ -39,6 +40,6 @@ extension IncTransactionsViewController {
 extension IncTransactionsViewController: AddIncomeViewControllerDelegate {
     func didAddIncome(_ income: TransactionObject) {
         viewModel?.addIncome(income)
-        delegate?.transactionWasAdded()
+        delegate?.transactionAdded()
     }
 }

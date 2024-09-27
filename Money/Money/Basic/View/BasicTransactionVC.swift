@@ -14,7 +14,7 @@ class BasicTransactionVC: UIViewController {
         let label = UILabel()
         
         label.text = Constants.Texts.titleText
-        label.font = .boldSystemFont(ofSize: 40)
+        label.font = .boldSystemFont(ofSize: Constants.Sizes.bigText)
         label.textAlignment = .center
         
         return label
@@ -24,10 +24,15 @@ class BasicTransactionVC: UIViewController {
         let button = UIButton()
         
         button.setTitle(Constants.Texts.buttonTitle, for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 40)
-        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.font = .boldSystemFont(ofSize: Constants.Sizes.buttonText)
+        button.setTitleColor(.black, for: .normal)
         
-        button.backgroundColor = .lightGray
+        button.layer.shadowColor = UIColor.gray.cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 2)
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 4
+        
+        button.backgroundColor = .systemYellow
         button.layer.cornerRadius = CGFloat(Constants.Sizes.buttonHeight / 2)
         
         button.addTarget(nil, action: #selector(addButtonTapped), for: .touchUpInside)
@@ -58,7 +63,7 @@ class BasicTransactionVC: UIViewController {
         
         setupTableView()
         setupUI()
-        registerObserver()
+//        registerObserver()
     }
 }
 
@@ -70,13 +75,13 @@ extension BasicTransactionVC {
             }
         }
     
-    private func registerObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(updateData), name: NSNotification.Name("Update"), object: nil)
-    }
-    
-    @objc private func updateData() {
-        viewModel?.getTransactions()
-    }
+//    private func registerObserver() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(updateData), name: NSNotification.Name("Update"), object: nil)
+//    }
+//    
+//    @objc private func updateData() {
+//        viewModel?.getTransactions()
+//    }
     
     func setupTableView() {
         table.register(TransactionTableViewCell.self, forCellReuseIdentifier: TransactionTableViewCell.reuseID)
@@ -104,7 +109,7 @@ extension BasicTransactionVC {
         }
         
         plusButton.snp.makeConstraints { make in
-            make.width.height.equalTo(Constants.Sizes.buttonHeight)
+            make.height.width.equalTo(Constants.Sizes.buttonHeight)
             make.trailing.equalToSuperview().inset(40)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(80)
         }
@@ -147,7 +152,11 @@ private extension BasicTransactionVC {
             static let titleText = "Transactions"
         }
         enum Sizes {
+            static let bigText: CGFloat = 50
+            static let smallText: CGFloat = 20
+            static let buttonText: CGFloat = 30
             static let buttonHeight: CGFloat = 70.0
+            static let buttonWidth: CGFloat = 210.0
         }
     }
 }

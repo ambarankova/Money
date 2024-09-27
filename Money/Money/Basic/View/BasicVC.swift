@@ -14,7 +14,7 @@ class BasicVC: UIViewController {
         let label = UILabel()
         
         label.text = Constants.Texts.countLabelText
-        label.font = .boldSystemFont(ofSize: 40)
+        label.font = .boldSystemFont(ofSize: Constants.Sizes.bigText)
         label.textAlignment = .center
         
         return label
@@ -24,7 +24,8 @@ class BasicVC: UIViewController {
         let label = UILabel()
         
         label.text = Constants.Texts.plusMonthLabelText
-        label.font = .systemFont(ofSize: 20)
+        label.font = .systemFont(ofSize: Constants.Sizes.smallText)
+        label.textColor = .systemYellow
         label.textAlignment = .center
         
         return label
@@ -34,11 +35,17 @@ class BasicVC: UIViewController {
         let button = UIButton()
         
         button.setTitle(Constants.Texts.buttonTitle, for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 15)
+        button.titleLabel?.font = .boldSystemFont(ofSize: Constants.Sizes.buttonText)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.numberOfLines = 2
+        button.setTitleColor(.black, for: .normal)
         
-        button.backgroundColor = .lightGray
+        button.layer.shadowColor = UIColor.gray.cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 2)
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 4
+        
+        button.backgroundColor = .systemYellow
         button.layer.cornerRadius = CGFloat(Constants.Sizes.buttonHeight / 2)
         
         button.addTarget(nil, action: #selector(clearButtonTapped), for: .touchUpInside)
@@ -69,12 +76,12 @@ class BasicVC: UIViewController {
         
         setupUI()
         setupTableView()
-        registerObserver()
+//        registerObserver()
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+//    deinit {
+//        NotificationCenter.default.removeObserver(self)
+//    }
 }
 
 // MARK: - Private
@@ -85,9 +92,9 @@ extension BasicVC {
             }
     }
     
-    private func registerObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(updateData), name: NSNotification.Name("Update"), object: nil)
-    }
+//    private func registerObserver() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(updateData), name: NSNotification.Name("Update"), object: nil)
+//    }
     
     private func setupTableView() {
         table.register(MainTransactionTableViewCell.self, forCellReuseIdentifier: MainTransactionTableViewCell.reuseID)
@@ -121,7 +128,8 @@ extension BasicVC {
         }
         
         clearButton.snp.makeConstraints { make in
-            make.width.height.equalTo(Constants.Sizes.buttonHeight)
+            make.height.equalTo(Constants.Sizes.buttonHeight)
+            make.width.equalTo(Constants.Sizes.buttonWidth)
             make.trailing.equalToSuperview().inset(40)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(80)
         }
@@ -212,7 +220,11 @@ private extension BasicVC {
             static let cancelAction = "Cancel"
         }
         enum Sizes {
+            static let bigText: CGFloat = 50
+            static let smallText: CGFloat = 20
+            static let buttonText: CGFloat = 17
             static let buttonHeight: CGFloat = 70.0
+            static let buttonWidth: CGFloat = 210.0
         }
     }
 }

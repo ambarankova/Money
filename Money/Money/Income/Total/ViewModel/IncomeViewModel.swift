@@ -27,6 +27,7 @@ final class IncomeViewModel: BasicVM {
             
             centralSection.items.append(TransactionObject(category: category, date: nil, plan: plan, fact: 0))
         }
+        reloadTable?()
     }
     
     override func countTotal() {

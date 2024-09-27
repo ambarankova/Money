@@ -18,7 +18,7 @@ final class IncomeViewController: BasicVC {
 }
 
 extension IncomeViewController: IncTransactionViewControllerDelegate {
-    func transactionWasAdded() {
+    func transactionAdded() {
         viewModel?.getTransaction()
         viewModel?.reloadTable?()
     }
