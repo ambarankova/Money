@@ -35,3 +35,12 @@ final class ExpensesViewController: BasicVC {
         return cell
     }
 }
+
+// Метод делегата будет обновлять табличку
+extension ExpensesViewController: ExpTransactionViewControllerDelegate {
+
+    func transactionWasAdded() {
+        viewModel?.getTransaction()
+        viewModel?.reloadTable?()
+    }
+}

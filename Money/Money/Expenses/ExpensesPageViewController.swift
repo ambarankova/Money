@@ -31,7 +31,11 @@ final class ExpensesPageViewController: UIPageViewController {
         super.viewDidLoad()
         
         setViewControllers([pages[0]], direction: .forward, animated: true, completion: nil)
-        
+
+        if let expTransactionVC = pages[1] as? ExpTransactionViewController {
+            expTransactionVC.delegate = pages[0] as? ExpensesViewController
+        }
+
         setupPageViewController()
         setupUI()
         setupPageControl()

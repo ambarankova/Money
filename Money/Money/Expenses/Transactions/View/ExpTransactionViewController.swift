@@ -8,7 +8,14 @@
 import SnapKit
 import UIKit
 
+protocol ExpTransactionViewControllerDelegate: AnyObject {
+    func transactionWasAdded()
+}
+
 final class ExpTransactionViewController: BasicTransactionVC {
+
+    weak var delegate: ExpTransactionViewControllerDelegate?
+
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard let transaction = viewModel?.sections[indexPath.section].items[indexPath.row] as? TransactionObject else { return nil}
@@ -33,5 +40,6 @@ extension ExpTransactionViewController {
 extension ExpTransactionViewController: AddExpensesViewControllerDelegate {
     func didAddExpense(_ expense: TransactionObject) {
         viewModel?.addExpenses(expense)
+        delegate?.transactionWasAdded()
     }
 }

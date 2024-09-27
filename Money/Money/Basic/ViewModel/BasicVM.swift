@@ -35,17 +35,17 @@ class BasicVM: MainTransactionViewModelProtocol {
     }
     
     func getTransaction() {
-        sections.removeAll()
-        
+        for index in centralSection.items.indices {
+            centralSection.items[index].fact = 0
+        }
+
         for transaction in transactions {
             if let index = centralSection.items.firstIndex(where: { $0.category == transaction.category }) {
                 let expense = centralSection.items[index]
-                guard var fact = expense.fact else { return }
-                fact += transaction.fact ?? 0
-                centralSection.items[index].fact = fact
+                centralSection.items[index].fact = (expense.fact ?? 0) + (transaction.fact ?? 0)
             }
         }
-        
+
         initialSetupTable()
     }
     
@@ -72,15 +72,15 @@ class BasicVM: MainTransactionViewModelProtocol {
         countTotal()
     }
     
-    private func setMocks() {
-        centralSection = TableViewSection(items:
-                                            [TransactionObject(category: "Transport",
-                                                               date: Date(), plan: 2000,
-                                                               fact: 2000),
-                                             TransactionObject(category: "Beauty",
-                                                               date: Date(), plan: 5000,
-                                                               fact: 1000)])
-    }
+//    private func setMocks() {
+//        centralSection = TableViewSection(items:
+//                                            [TransactionObject(category: "Transport",
+//                                                               date: Date(), plan: 2000,
+//                                                               fact: 2000),
+//                                             TransactionObject(category: "Beauty",
+//                                                               date: Date(), plan: 5000,
+//                                                               fact: 1000)])
+//    }
 }
 
 // MARK: - UI constants
