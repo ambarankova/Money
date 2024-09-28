@@ -43,10 +43,10 @@ final class CurrencyViewModel: CurrencyViewModelProtocol {
             }
         }
     }
-    
+
     func convertToLabel(_ currency: CurrencyObject) {
-        dollarPrice = currency.USDRUB
-        euroPrice = currency.EURRUB
+        dollarPrice = String(format: "%.2f", 1 / currency.conversionRates.USD)
+        euroPrice = String(format: "%.2f", 1 / currency.conversionRates.EUR)
     }
 }
 

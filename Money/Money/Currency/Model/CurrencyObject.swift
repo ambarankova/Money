@@ -8,11 +8,10 @@
 import Foundation
 
 struct CurrencyObject: Codable {
-    let USDRUB: String
-    let EURRUB: String
-    
-    enum CodingKeys: CodingKey {
-        case USDRUB
-        case EURRUB
-    }
+    let conversionRates: Rate
+}
+
+struct Rate: Codable {
+    let EUR: Double
+    let USD: Double
 }

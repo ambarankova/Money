@@ -24,7 +24,6 @@
 		CD75DE0F2CA4371B008013A3 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75DE0E2CA4371B008013A3 /* APIManager.swift */; };
 		CD75DE112CA43791008013A3 /* CurrencyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75DE102CA43791008013A3 /* CurrencyObject.swift */; };
 		CD75DE132CA43E2D008013A3 /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75DE122CA43E2D008013A3 /* NetworkingError.swift */; };
-		CD75DE152CA43E79008013A3 /* DataCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75DE142CA43E79008013A3 /* DataCurrency.swift */; };
 		CD75DE172CA43FD5008013A3 /* CurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75DE162CA43FD5008013A3 /* CurrencyViewModel.swift */; };
 		CDA019522C6E3399002ACF11 /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA019512C6E3399002ACF11 /* TableViewSection.swift */; };
 		CDA019542C6E55CD002ACF11 /* ExpTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA019532C6E55CD002ACF11 /* ExpTransactionViewController.swift */; };
@@ -66,7 +65,6 @@
 		CD75DE0E2CA4371B008013A3 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		CD75DE102CA43791008013A3 /* CurrencyObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyObject.swift; sourceTree = "<group>"; };
 		CD75DE122CA43E2D008013A3 /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
-		CD75DE142CA43E79008013A3 /* DataCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCurrency.swift; sourceTree = "<group>"; };
 		CD75DE162CA43FD5008013A3 /* CurrencyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewModel.swift; sourceTree = "<group>"; };
 		CDA019512C6E3399002ACF11 /* TableViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSection.swift; sourceTree = "<group>"; };
 		CDA019532C6E55CD002ACF11 /* ExpTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpTransactionViewController.swift; sourceTree = "<group>"; };
@@ -231,7 +229,6 @@
 			isa = PBXGroup;
 			children = (
 				CD75DE102CA43791008013A3 /* CurrencyObject.swift */,
-				CD75DE142CA43E79008013A3 /* DataCurrency.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -451,7 +448,6 @@
 			files = (
 				CD75DE0F2CA4371B008013A3 /* APIManager.swift in Sources */,
 				CD500A202CA1F573008292F5 /* IncTransactionsViewModel.swift in Sources */,
-				CD75DE152CA43E79008013A3 /* DataCurrency.swift in Sources */,
 				CD500A222CA1F591008292F5 /* IncTransactionsViewController.swift in Sources */,
 				CD500A192CA1F4DF008292F5 /* IncomeViewModel.swift in Sources */,
 				CDC657BC2C74F7B000912BBF /* ExpensePersistant.swift in Sources */,
