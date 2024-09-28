@@ -8,13 +8,16 @@
 import Foundation
 
 final class ApiManager {
-    private static let apiKey = "1536896d43d94ec7f551ab4407af76d3"
-    private static let baseUrl = "https://currate.ru/api/"
-    private static var path = "?get=rates&pairs=USDRUB,EURRUB&key="
+    
+
+    
+    private static let apiKey = "68e06ccf773b22bfe72168b5"
+    private static let baseUrl = "https://v6.exchangerate-api.com/v6/"
+    private static var path = "/latest/RUB"
     
     static func getNews(completion: @escaping (Result<CurrencyObject, Error>) -> ()) {
         
-        let stringUrl = baseUrl + path + apiKey
+        let stringUrl = baseUrl + apiKey + path
         
         guard let url = URL(string: stringUrl) else { return }
         
@@ -31,9 +34,11 @@ final class ApiManager {
         } else if let data = data {
 
             do {
-                let model = try JSONDecoder().decode(DataCurrency.self,
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let model = try decoder.decode(CurrencyObject.self,
                                                      from: data)
-                completion(.success(model.objects))
+                completion(.success(model))
             }
             catch let decodeError {
                 completion(.failure(decodeError))
