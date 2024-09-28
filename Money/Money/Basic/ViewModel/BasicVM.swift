@@ -65,6 +65,7 @@ class BasicVM: MainTransactionViewModelProtocol {
     
     func changePlan(_ newPlan: Float, _ category: String) {
         UserDefaults.standard.set(newPlan, forKey: category)
+        categorySetupTable()
     }
     
     func clearAll() { }
