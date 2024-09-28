@@ -1,30 +1,30 @@
 //
-//  ExpensesViewModel.swift
+//  IncomeViewModel.swift
 //  Money
 //
-//  Created by Анастасия Ахановская on 14.08.2024.
+//  Created by Анастасия Ахановская on 23.09.2024.
 //
 
 import UIKit
 
-final class ExpensesViewModel: BasicVM {
+final class IncomeViewModel: BasicVM {
     // MARK: - Properties
     override var transactions: [TransactionObject] {
         get {
-            return ExpensePersistant.fetchAll()
+            return IncomePersistant.fetchAll()
         }
         set { }
     }
     
     // MARK: - Methods
     override func clearAll() {
-        ExpensePersistant.clearCoreData()
+        IncomePersistant.clearCoreData()
     }
     
     override func categorySetupTable() {
         centralSection.items.removeAll()
-
-        for category in Categories().categoriesExpense {
+        
+        for category in Categories().categoriesIncome {
             let plan = UserDefaults.standard.float(forKey: category)
             
             centralSection.items.append(TransactionObject(category: category, date: nil, plan: plan, fact: 0))
@@ -34,6 +34,7 @@ final class ExpensesViewModel: BasicVM {
     }
     
     override func countTotal() {
-        count = Int((sections.last?.items[0].plan ?? 0) - (sections.last?.items[0].fact ?? 0))
+        count = Int((sections.last?.items[0].fact ?? 0) - (sections.last?.items[0].plan ?? 0))
     }
 }
+

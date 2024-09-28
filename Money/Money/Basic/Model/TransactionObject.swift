@@ -1,5 +1,5 @@
 //
-//  ExpensesObject.swift
+//  TransactionObject.swift
 //  Money
 //
 //  Created by Анастасия Ахановская on 14.08.2024.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct ExpensesObject: TableViewSectionProtocol {
+struct TransactionObject: TableViewSectionProtocol {
     let category: String
-    let plan: Float?
-    let fact: Float?
     let date: Date?
+    var plan: Float?
+    var fact: Float?
 }

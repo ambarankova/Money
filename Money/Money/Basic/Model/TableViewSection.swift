@@ -8,11 +8,11 @@
 import Foundation
 
 protocol TableViewSectionProtocol {
-    var plan: Float? { get }
-    var fact: Float? { get }
+    var category: String { get }
+    var plan: Float? { get set }
+    var fact: Float? { get set }
 }
 
 struct TableViewSection {
-    var title: String?
     var items: [TableViewSectionProtocol]
 }

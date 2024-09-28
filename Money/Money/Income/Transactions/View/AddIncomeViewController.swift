@@ -1,11 +1,18 @@
+//
+//  AddIncomeViewController.swift
+//  Money
+//
+//  Created by Анастасия Ахановская on 24.09.2024.
+//
+
 import UIKit
 import SnapKit
 
-protocol AddExpensesViewControllerDelegate: AnyObject {
-    func didAddExpense(_ expense: TransactionObject)
+protocol AddIncomeViewControllerDelegate: AnyObject {
+    func didAddIncome(_ income: TransactionObject)
 }
 
-final class AddExpensesViewController: UIViewController {
+final class AddIncomeViewController: UIViewController {
     // MARK: - GUI Elements
     private lazy var categoryTextField = createTextField(text: Constants.Texts.selectText)
     
@@ -18,10 +25,10 @@ final class AddExpensesViewController: UIViewController {
         
         return picker
     }()
-    
+
     private let saveButton: UIButton = {
         let button = UIButton(type: .system)
-        
+
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: Constants.Sizes.buttonText)
         button.layer.shadowColor = UIColor.gray.cgColor
@@ -37,47 +44,45 @@ final class AddExpensesViewController: UIViewController {
         
         return button
     }()
-    
+
     private let categoryPickerView = UIPickerView()
     
     // MARK: - Properties
+    private let categories = Categories().categoriesIncome
     private var selectedCategory: String?
     private let dateFormatter = DateFormatter()
-    private let categories = Categories().categoriesExpense
-    
-    weak var delegate: AddExpensesViewControllerDelegate?
-    
+
+    weak var delegate: AddIncomeViewControllerDelegate?
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupUI()
         setupPickerView()
     }
 }
 
 // MARK: - Private
-private extension AddExpensesViewController {
+private extension AddIncomeViewController {
     @objc func saveButtonTapped() {
         guard let category = selectedCategory,
               let amountText = amountTextField.text,
               let amount = Float(amountText) else { return }
         let date = datePicker.date
         
-        let expense = TransactionObject(category: category, date: date, plan: amount, fact: amount)
-        
-        NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
-        
-        delegate?.didAddExpense(expense)
+        let income = TransactionObject(category: category, date: date, plan: amount, fact: amount)
+        delegate?.didAddIncome(income)
         dismiss(animated: true, completion: nil)
     }
     
     func setupUI() {
         view.backgroundColor = .white
-        
+
         [categoryTextField, amountTextField, datePicker, saveButton].forEach { view.addSubview($0) }
         setupConstraints()
     }
-    
+
     func setupConstraints() {
         categoryTextField.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(80)
@@ -85,7 +90,7 @@ private extension AddExpensesViewController {
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
-        
+
         amountTextField.snp.makeConstraints { make in
             make.top.equalTo(categoryTextField.snp.bottom).offset(20)
             make.height.equalTo(Constants.Sizes.buttonHeight)
@@ -97,7 +102,7 @@ private extension AddExpensesViewController {
             make.top.equalTo(amountTextField.snp.bottom).offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
-        
+
         saveButton.snp.makeConstraints { make in
             make.top.equalTo(datePicker.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
@@ -105,11 +110,12 @@ private extension AddExpensesViewController {
             make.width.equalTo(Constants.Sizes.buttonWidth)
         }
     }
-    
+
     func setupPickerView() {
         categoryPickerView.delegate = self
         categoryPickerView.dataSource = self
         categoryTextField.inputView = categoryPickerView
+        categoryTextField.tintColor = .clear
     }
     
     func createTextField(text: String) -> UITextField {
@@ -142,19 +148,19 @@ private extension AddExpensesViewController {
 }
 
 // MARK: - UIPickerViewDelegate & UIPickerViewDataSource
-extension AddExpensesViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension AddIncomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return categories.count
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return categories[row]
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedCategory = categories[row]
         categoryTextField.text = selectedCategory
@@ -162,7 +168,7 @@ extension AddExpensesViewController: UIPickerViewDelegate, UIPickerViewDataSourc
 }
 
 // MARK: - UI constants
-private extension AddExpensesViewController {
+private extension AddIncomeViewController {
     enum Constants {
         enum Texts {
             static let saveButtonText = "Save"
@@ -176,3 +182,4 @@ private extension AddExpensesViewController {
         }
     }
 }
+

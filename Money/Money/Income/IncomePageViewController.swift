@@ -1,19 +1,19 @@
 //
-//  ExpensesPageViewController.swift
+//  IncomePageViewController.swift
 //  Money
 //
-//  Created by Анастасия Ахановская on 13.08.2024.
+//  Created by Анастасия Ахановская on 23.09.2024.
 //
 
 import SnapKit
 import UIKit
 
-final class ExpensesPageViewController: UIPageViewController {
+final class IncomePageViewController: UIPageViewController {
     // MARK: - GUI elements
     let pageControl = UIPageControl(frame: CGRect())
     
     // MARK: - Properties
-    var pages: [UIViewController] = [ExpensesViewController(viewModel: ExpensesViewModel()), ExpTransactionViewController(viewModel: ExpTransactionViewModel())]
+    var pages: [UIViewController] = [IncomeViewController(viewModel: IncomeViewModel()), IncTransactionsViewController(viewModel: IncTransactionsViewModel())]
     
     // MARK: - Life Cycle
     init() {
@@ -31,11 +31,11 @@ final class ExpensesPageViewController: UIPageViewController {
         super.viewDidLoad()
         
         setViewControllers([pages[0]], direction: .forward, animated: true, completion: nil)
-
-        if let expTransactionVC = pages[1] as? ExpTransactionViewController {
-            expTransactionVC.delegate = pages[0] as? ExpensesViewController
+        
+        if let incTransactionVC = pages[1] as? IncTransactionsViewController {
+            incTransactionVC.delegate = pages[0] as? IncomeViewController
         }
-
+        
         setupPageViewController()
         setupUI()
         setupPageControl()
@@ -43,7 +43,7 @@ final class ExpensesPageViewController: UIPageViewController {
 }
 
 // MARK: - Methods
-extension ExpensesPageViewController {
+extension IncomePageViewController {
     func setupUI() {
         view.addSubview(pageControl)
         setupConstraints()
@@ -70,7 +70,7 @@ extension ExpensesPageViewController {
 }
 
 // MARK: - UIPageViewControllerDelegate
-extension ExpensesPageViewController: UIPageViewControllerDelegate {
+extension IncomePageViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard
             let visibleViewController = pageViewController.viewControllers?.first,
@@ -83,7 +83,7 @@ extension ExpensesPageViewController: UIPageViewControllerDelegate {
 }
 
 // MARK: - UIPageViewControllerDataSource
-extension ExpensesPageViewController: UIPageViewControllerDataSource {
+extension IncomePageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let currentIndex = pages.firstIndex(of: viewController), currentIndex > 0 else {
             return nil
@@ -91,7 +91,7 @@ extension ExpensesPageViewController: UIPageViewControllerDataSource {
         return pages[currentIndex - 1]
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {   
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let currentIndex = pages.firstIndex(of: viewController), currentIndex < pages.count - 1 else {
             return nil
         }

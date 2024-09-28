@@ -1,5 +1,5 @@
 //
-//  TransactionEntity+CoreDataClass.swift
+//  ExpenseEntity+CoreDataClass.swift
 //  Money
 //
 //  Created by Анастасия Ахановская on 20.08.2024.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(TransactionEntity)
-public class TransactionEntity: NSManagedObject {
+@objc(ExpenseEntity)
+public class ExpenseEntity: NSManagedObject {
 
 }

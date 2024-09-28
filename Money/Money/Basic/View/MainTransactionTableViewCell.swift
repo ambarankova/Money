@@ -5,32 +5,32 @@
 //  Created by Анастасия Ахановская on 13.08.2024.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
-final class ExpensesTableViewCell: UITableViewCell {
-
+final class MainTransactionTableViewCell: UITableViewCell {
     // MARK: - GUI Variables
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
+        
         view.axis = .horizontal
         view.distribution = .fillEqually
         view.alignment = .center
         view.spacing = 5
+        
         return view
     }()
     
-    private lazy var categoryLabel = createLabel(font: .boldSystemFont(ofSize: textSize),
+    private lazy var categoryLabel = createLabel(font: .boldSystemFont(ofSize: Constants.Sizes.textSize),
                                                  aligment: .left,
                                                  text: "Food")
-    private lazy var planLabel = createLabel(font: .systemFont(ofSize: textSize),
+    private lazy var planLabel = createLabel(font: .systemFont(ofSize: Constants.Sizes.textSize),
                                              text: "100")
-    private lazy var factLabel = createLabel(font: .systemFont(ofSize: textSize),
+    private lazy var factLabel = createLabel(font: .systemFont(ofSize: Constants.Sizes.textSize),
                                              text: "20")
     
     // MARK: - Properties
-    static let reuseID = "ExpensesTableViewCell"
-    private let textSize: CGFloat = 17
+    static let reuseID = "MainTransactionTableViewCell"
     
     // MARK: - Initializations
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -38,26 +38,26 @@ final class ExpensesTableViewCell: UITableViewCell {
         
         setupUI()
     }
-
+    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - Methods
-    func configure(with expense: ExpensesObject) {
-        categoryLabel.text = expense.category
-
-        let defaultPlanText = "Plan"
-        let defaultFactText = "Fact"
+    func configure(with transaction: TransactionObject) {
+        categoryLabel.text = transaction.category
         
-        if let plan = expense.plan {
+        let defaultPlanText = Constants.Texts.defaultPlan
+        let defaultFactText = Constants.Texts.defautFact
+        
+        if let plan = transaction.plan {
             planLabel.text = String(plan)
         } else {
             planLabel.text = defaultPlanText
         }
-
-        if let fact = expense.fact {
+        
+        if let fact = transaction.fact {
             factLabel.text = String(fact)
         } else {
             factLabel.text = defaultFactText
@@ -65,21 +65,21 @@ final class ExpensesTableViewCell: UITableViewCell {
     }
 }
 
-// MARK: - Private
-private extension ExpensesTableViewCell {
+// MARK: - Private 
+private extension MainTransactionTableViewCell {
     func setupUI() {
         contentView.addSubview(stackView)
         [categoryLabel, planLabel, factLabel].forEach { stackView.addArrangedSubview($0) }
         setupConstraints()
     }
-
+    
     func setupConstraints() {
         stackView.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().offset(8)
             make.bottom.trailing.equalToSuperview().offset(-8)
         }
     }
-
+    
     func createLabel(font: UIFont?,
                      aligment: NSTextAlignment? = nil,
                      color: UIColor? = nil,
@@ -91,5 +91,18 @@ private extension ExpensesTableViewCell {
         label.textColor = color
         label.textAlignment = aligment ?? .center
         return label
+    }
+}
+
+// MARK: - UI constants
+private extension MainTransactionTableViewCell {
+    enum Constants {
+        enum Texts {
+            static let defaultPlan = "Plan"
+            static let defautFact = "Fact"
+        }
+        enum Sizes {
+            static let textSize: CGFloat = 17
+        }
     }
 }
