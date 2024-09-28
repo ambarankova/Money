@@ -22,11 +22,14 @@ final class ExpensesViewModel: BasicVM {
     }
     
     override func categorySetupTable() {
+        centralSection.items.removeAll()
+
         for category in Categories().categoriesExpense {
             let plan = UserDefaults.standard.float(forKey: category)
             
             centralSection.items.append(TransactionObject(category: category, date: nil, plan: plan, fact: 0))
         }
+        getTransaction()
         reloadTable?()
     }
     

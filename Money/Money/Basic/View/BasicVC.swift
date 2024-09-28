@@ -86,6 +86,7 @@ class BasicVC: UIViewController {
 
 // MARK: - Private
 extension BasicVC {
+
     private func setupViewModel() {
         viewModel?.reloadTable = { [weak self] in
                 self?.table.reloadData()
@@ -149,37 +150,42 @@ extension BasicVC {
     @objc private func updateData() {
         table.reloadData()
     }
+
+    func showAlert(for category: String) {
+        let alertController = UIAlertController(title: Constants.Texts.alertTitle, message: nil, preferredStyle: .alert)
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = Constants.Texts.placeholderText
+            textField.keyboardType = .numberPad
+        }
+        
+        let confirmAction = UIAlertAction(title: Constants.Texts.confirmationAction, style: .default) { _ in
+            if let newPlanText = alertController.textFields?.first?.text,
+               let newPlan = Float(newPlanText) {
+                self.viewModel?.changePlan(newPlan, category)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: Constants.Texts.cancelAction, style: .cancel, handler: nil)
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UITableViewDelegate
 extension BasicVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section != 0 && (indexPath.section + 1) != viewModel?.sections.count {
-            guard let category = viewModel?.sections[indexPath.section].items[indexPath.row].category else { return }
-            
-            let alertController = UIAlertController(title: Constants.Texts.alertTitle, message: nil, preferredStyle: .alert)
-            
-            alertController.addTextField { (textField) in
-                textField.placeholder = Constants.Texts.placeholderText
-                textField.keyboardType = .numberPad
-            }
-            
-            let confirmAction = UIAlertAction(title: Constants.Texts.confirmationAction, style: .default) { _ in
-                if let newPlanText = alertController.textFields?.first?.text,
-                   let newPlan = Float(newPlanText) {
-                    self.viewModel?.changePlan(newPlan, category)
-                }
-                self.viewModel?.categorySetupTable()
-                tableView.reloadData()
-            }
-            
-            let cancelAction = UIAlertAction(title: Constants.Texts.cancelAction, style: .cancel, handler: nil)
-            
-            alertController.addAction(confirmAction)
-            alertController.addAction(cancelAction)
-            
-            present(alertController, animated: true, completion: nil)
+        guard
+            let sections = viewModel?.sections,
+            indexPath.section > 0,
+            indexPath.section < sections.count - 1
+        else {
+            return
         }
+
+        let category = sections[indexPath.section].items[indexPath.row].category
+        showAlert(for: category)
     }
 }
 
