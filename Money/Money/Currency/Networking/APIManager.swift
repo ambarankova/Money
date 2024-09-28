@@ -10,7 +10,9 @@ import Foundation
 final class ApiManager {
     private static let apiKey = "1536896d43d94ec7f551ab4407af76d3"
     private static let baseUrl = "https://currate.ru/api/"
+    private static let date = "&date=2018-02-12T15:00:00"
     private static var path = "?get=rates&pairs=USDRUB,EURRUB&key="
+//    private static var path = "?get=rates&pairs=USDRUB,EURRUB" + date + "&key="
     
     static func getNews(completion: @escaping (Result<CurrencyObject, Error>) -> ()) {
         

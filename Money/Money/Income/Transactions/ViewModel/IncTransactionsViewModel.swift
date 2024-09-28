@@ -18,8 +18,6 @@ final class IncTransactionsViewModel: BasicTransactionVM {
     
     // MARK: - Methods
     override func addIncome(_ income: TransactionObject) {
-        NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
-        
         IncomePersistant.save(income)
         getTransactions()
     }

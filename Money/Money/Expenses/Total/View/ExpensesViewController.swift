@@ -14,6 +14,7 @@ final class ExpensesViewController: BasicVC {
         viewModel?.clearAll()
         viewModel?.getTransaction()
         viewModel?.reloadTable?()
+        setupCountLabel()
     }
 }
 
@@ -21,5 +22,6 @@ extension ExpensesViewController: ExpTransactionViewControllerDelegate {
     func transactionWasAdded() {
         viewModel?.getTransaction()
         viewModel?.reloadTable?()
+        setupCountLabel()
     }
 }
