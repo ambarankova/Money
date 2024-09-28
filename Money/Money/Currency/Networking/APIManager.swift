@@ -8,9 +8,7 @@
 import Foundation
 
 final class ApiManager {
-    
 
-    
     private static let apiKey = "68e06ccf773b22bfe72168b5"
     private static let baseUrl = "https://v6.exchangerate-api.com/v6/"
     private static var path = "/latest/RUB"

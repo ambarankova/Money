@@ -14,6 +14,7 @@ final class IncomeViewController: BasicVC {
         viewModel?.clearAll()
         viewModel?.getTransaction()
         viewModel?.reloadTable?()
+        setupCountLabel()
     }
 }
 

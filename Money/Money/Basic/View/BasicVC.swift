@@ -59,29 +59,24 @@ class BasicVC: UIViewController {
     var viewModel: MainTransactionViewModelProtocol?
     
     // MARK: - Life Cycle
-        init(viewModel: MainTransactionViewModelProtocol) {
-            self.viewModel = viewModel
+    init(viewModel: MainTransactionViewModelProtocol) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+        
+        self.setupViewModel()
+    }
     
-            super.init(nibName: nil, bundle: nil)
-    
-            self.setupViewModel()
-        }
-    
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
         setupTableView()
-//        registerObserver()
     }
-    
-//    deinit {
-//        NotificationCenter.default.removeObserver(self)
-//    }
 }
 
 // MARK: - Private
@@ -92,10 +87,6 @@ extension BasicVC {
                 self?.table.reloadData()
             }
     }
-    
-//    private func registerObserver() {
-//        NotificationCenter.default.addObserver(self, selector: #selector(updateData), name: NSNotification.Name("Update"), object: nil)
-//    }
     
     private func setupTableView() {
         table.register(MainTransactionTableViewCell.self, forCellReuseIdentifier: MainTransactionTableViewCell.reuseID)
@@ -136,7 +127,7 @@ extension BasicVC {
         }
     }
     
-    private func setupCountLabel() {
+    func setupCountLabel() {
         guard let countInt = viewModel?.count else { return }
         countLabel.text = String(countInt)
         
@@ -163,6 +154,7 @@ extension BasicVC {
             if let newPlanText = alertController.textFields?.first?.text,
                let newPlan = Float(newPlanText) {
                 self.viewModel?.changePlan(newPlan, category)
+                self.setupCountLabel()
             }
         }
         

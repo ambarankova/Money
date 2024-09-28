@@ -58,12 +58,18 @@ class BasicTransactionVC: UIViewController {
             fatalError("init(coder:) has not been implemented")
         }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel?.getTransactions()
+        viewModel?.reloadTable?()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTableView()
         setupUI()
-//        registerObserver()
     }
 }
 
@@ -74,14 +80,6 @@ extension BasicTransactionVC {
                 self?.table.reloadData()
             }
         }
-    
-//    private func registerObserver() {
-//        NotificationCenter.default.addObserver(self, selector: #selector(updateData), name: NSNotification.Name("Update"), object: nil)
-//    }
-//    
-//    @objc private func updateData() {
-//        viewModel?.getTransactions()
-//    }
     
     func setupTableView() {
         table.register(TransactionTableViewCell.self, forCellReuseIdentifier: TransactionTableViewCell.reuseID)
