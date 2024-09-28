@@ -154,6 +154,7 @@ extension BasicVC {
             if let newPlanText = alertController.textFields?.first?.text,
                let newPlan = Float(newPlanText) {
                 self.viewModel?.changePlan(newPlan, category)
+                self.setupCountLabel()
             }
         }
         

@@ -32,6 +32,10 @@ final class IncomePageViewController: UIPageViewController {
         
         setViewControllers([pages[0]], direction: .forward, animated: true, completion: nil)
         
+        if let incTransactionVC = pages[1] as? IncTransactionsViewController {
+            incTransactionVC.delegate = pages[0] as? IncomeViewController
+        }
+        
         setupPageViewController()
         setupUI()
         setupPageControl()
