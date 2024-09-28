@@ -97,8 +97,7 @@ private extension CurrencyViewController {
     func setupUI() {
         [dollarLabel, dollarTextLabel, euroLabel, euroTextLabel, rubleTextLabel1, rubleTextLabel2].forEach { view.addSubview($0) }
         view.backgroundColor = .white
-        
-//        setupLabels()
+
         setupConstraints()
     }
     
@@ -133,15 +132,6 @@ private extension CurrencyViewController {
             make.leading.trailing.equalToSuperview()
         }
     }
-    
-//    func setupLabels() {
-//        let separator: Character = "."
-//        guard let index = dollarLabel.text?.firstIndex(where: { $0 == separator }),
-//              let endIndex = dollarLabel.text?.index(index, offsetBy: 2) else { return }
-//        
-//        dollarLabel.text = String(viewModel?.dollarPrice[..<endIndex] ?? "")
-//        euroLabel.text = String(viewModel?.euroPrice[..<endIndex] ?? "")
-//    }
 }
 
 // MARK: - UI constants
