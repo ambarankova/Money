@@ -19,8 +19,7 @@ final class IncTransactionsViewController: BasicTransactionVC {
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard let transaction = viewModel?.sections[indexPath.section].items[indexPath.row] as? TransactionObject else { return nil}
-        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (action, view, success) in
-            print("Delete action")
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete".localized) { (action, view, success) in
             IncomePersistant.delete(transaction)
             self.delegate?.transactionAdded()
         }

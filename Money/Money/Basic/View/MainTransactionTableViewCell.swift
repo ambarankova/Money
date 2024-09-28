@@ -98,8 +98,8 @@ private extension MainTransactionTableViewCell {
 private extension MainTransactionTableViewCell {
     enum Constants {
         enum Texts {
-            static let defaultPlan = "Plan"
-            static let defautFact = "Fact"
+            static let defaultPlan = "Plan".localized
+            static let defautFact = "Fact".localized
         }
         enum Sizes {
             static let textSize: CGFloat = 17

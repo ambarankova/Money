@@ -22,13 +22,13 @@ final class TabBarController: UITabBarController {
         
         viewControllers = [
             setupNavigationController(rootViewController: CurrencyViewController(viewModel: CurrencyViewModel()),
-                                      title: "Currency",
+                                      title: "Currency".localized,
                                       image: UIImage(systemName: "dollarsign.arrow.circlepath") ?? UIImage.add),
             setupNavigationController(rootViewController: ExpensesPageViewController(),
-                                      title: "Expenses",
+                                      title: "Expenses".localized,
                                       image: UIImage(systemName: "arrow.down.circle") ?? UIImage.add),
             setupNavigationController(rootViewController: IncomePageViewController(),
-                                      title: "Income",
+                                      title: "Income".localized,
                                       image: UIImage(systemName: "arrow.up.circle") ?? UIImage.add)
         ]
     }

@@ -8,12 +8,12 @@
 import Foundation
 
 struct Categories {
-    let categoriesExpense = ["Transport",
-                             "Beauty",
-                             "Food",
-                             "Health"]
+    let categoriesExpense = ["Transport".localized,
+                             "Beauty".localized,
+                             "Food".localized,
+                             "Health".localized]
     
-    let categoriesIncome = ["Work",
-                            "Commission",
-                            "Rent"]
+    let categoriesIncome = ["Work".localized,
+                            "Commission".localized,
+                            "Rent".localized]
 }

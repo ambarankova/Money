@@ -35,6 +35,8 @@
 		CDC657BC2C74F7B000912BBF /* ExpensePersistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC657BB2C74F7B000912BBF /* ExpensePersistant.swift */; };
 		CDD283882C6CF07500BA95F6 /* TransactionObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD283872C6CF07500BA95F6 /* TransactionObject.swift */; };
 		CDD2838E2C6D049200BA95F6 /* ExpensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD2838D2C6D049200BA95F6 /* ExpensesViewModel.swift */; };
+		CDD9C88F2CA832FE008ADE51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDD9C8912CA832FE008ADE51 /* Localizable.strings */; };
+		CDD9C8942CA833DD008ADE51 /* String+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9C8932CA833DD008ADE51 /* String+Ex.swift */; };
 		CDE031B72C6BA08B0026677F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE031B62C6BA08B0026677F /* AppDelegate.swift */; };
 		CDE031BB2C6BA08B0026677F /* ExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE031BA2C6BA08B0026677F /* ExpensesViewController.swift */; };
 		CDE031C02C6BA08C0026677F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDE031BF2C6BA08C0026677F /* Assets.xcassets */; };
@@ -76,6 +78,9 @@
 		CDC657BB2C74F7B000912BBF /* ExpensePersistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensePersistant.swift; sourceTree = "<group>"; };
 		CDD283872C6CF07500BA95F6 /* TransactionObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionObject.swift; sourceTree = "<group>"; };
 		CDD2838D2C6D049200BA95F6 /* ExpensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewModel.swift; sourceTree = "<group>"; };
+		CDD9C88C2CA8329E008ADE51 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		CDD9C8902CA832FE008ADE51 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CDD9C8932CA833DD008ADE51 /* String+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ex.swift"; sourceTree = "<group>"; };
 		CDE031B32C6BA08B0026677F /* Money.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Money.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE031B62C6BA08B0026677F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDE031BA2C6BA08B0026677F /* ExpensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewController.swift; sourceTree = "<group>"; };
@@ -196,6 +201,10 @@
 			children = (
 				CDE031B62C6BA08B0026677F /* AppDelegate.swift */,
 				CDE031CA2C6BA1420026677F /* TabBarController.swift */,
+				CDE031BF2C6BA08C0026677F /* Assets.xcassets */,
+				CDE031C12C6BA08C0026677F /* LaunchScreen.storyboard */,
+				CDD9C8932CA833DD008ADE51 /* String+Ex.swift */,
+				CDD9C8912CA832FE008ADE51 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -342,6 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				CDE031B52C6BA08B0026677F /* Money */,
+				CDE031C42C6BA08C0026677F /* Info.plist */,
 				CDE031B42C6BA08B0026677F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -363,9 +373,6 @@
 				CDD283852C6CEF3500BA95F6 /* Income */,
 				CD75DE0C2CA4330D008013A3 /* Resources */,
 				CDC657B62C74F62000912BBF /* CoreData */,
-				CDE031BF2C6BA08C0026677F /* Assets.xcassets */,
-				CDE031C12C6BA08C0026677F /* LaunchScreen.storyboard */,
-				CDE031C42C6BA08C0026677F /* Info.plist */,
 			);
 			path = Money;
 			sourceTree = "<group>";
@@ -415,6 +422,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = CDE031AA2C6BA08B0026677F;
 			packageReferences = (
@@ -435,6 +443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDE031C32C6BA08C0026677F /* LaunchScreen.storyboard in Resources */,
+				CDD9C88F2CA832FE008ADE51 /* Localizable.strings in Resources */,
 				CDE031C02C6BA08C0026677F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,6 +476,7 @@
 				CDC657B92C74F6E600912BBF /* ExpenseEntity+CoreDataClass.swift in Sources */,
 				CDE031BB2C6BA08B0026677F /* ExpensesViewController.swift in Sources */,
 				CD500A252CA1FA81008292F5 /* IncomeEntity+CoreDataClass.swift in Sources */,
+				CDD9C8942CA833DD008ADE51 /* String+Ex.swift in Sources */,
 				CD7006632C6BDD8F00EAE0CD /* ExpensesPageViewController.swift in Sources */,
 				CD75DE132CA43E2D008013A3 /* NetworkingError.swift in Sources */,
 				CDE031CD2C6BA1F40026677F /* CurrencyViewController.swift in Sources */,
@@ -487,10 +497,19 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		CDD9C8912CA832FE008ADE51 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CDD9C8902CA832FE008ADE51 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		CDE031C12C6BA08C0026677F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CDE031C22C6BA08C0026677F /* Base */,
+				CDD9C88C2CA8329E008ADE51 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

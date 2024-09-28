@@ -22,5 +22,6 @@ extension IncomeViewController: IncTransactionViewControllerDelegate {
     func transactionAdded() {
         viewModel?.getTransaction()
         viewModel?.reloadTable?()
+        setupCountLabel()
     }
 }

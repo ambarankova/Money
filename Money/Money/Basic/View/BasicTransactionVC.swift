@@ -46,17 +46,17 @@ class BasicTransactionVC: UIViewController {
     var viewModel: TransactionViewModelProtocol?
     
     // MARK: - Life Cycle
-        init(viewModel: TransactionViewModelProtocol) {
-            self.viewModel = viewModel
+    init(viewModel: TransactionViewModelProtocol) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+        
+        self.setupViewModel()
+    }
     
-            super.init(nibName: nil, bundle: nil)
-    
-            self.setupViewModel()
-        }
-    
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -75,11 +75,11 @@ class BasicTransactionVC: UIViewController {
 
 // MARK: - Private
 extension BasicTransactionVC {
-        func setupViewModel() {
-            viewModel?.reloadTable = { [weak self] in
-                self?.table.reloadData()
-            }
+    func setupViewModel() {
+        viewModel?.reloadTable = { [weak self] in
+            self?.table.reloadData()
         }
+    }
     
     func setupTableView() {
         table.register(TransactionTableViewCell.self, forCellReuseIdentifier: TransactionTableViewCell.reuseID)
@@ -147,7 +147,7 @@ private extension BasicTransactionVC {
     enum Constants {
         enum Texts {
             static let buttonTitle = "+"
-            static let titleText = "Transactions"
+            static let titleText = "Transactions".localized
         }
         enum Sizes {
             static let bigText: CGFloat = 50

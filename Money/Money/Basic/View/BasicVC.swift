@@ -133,6 +133,8 @@ extension BasicVC {
         
         if countInt < 0 {
             monthLabel.text = Constants.Texts.minusMonthLabelText
+        } else {
+            monthLabel.text = Constants.Texts.plusMonthLabelText
         }
     }
     
@@ -208,14 +210,14 @@ extension BasicVC: UITableViewDataSource {
 private extension BasicVC {
     enum Constants {
         enum Texts {
-            static let countLabelText = "Count"
-            static let plusMonthLabelText = "keep it up!"
-            static let minusMonthLabelText = "keep an eye on the budget"
-            static let buttonTitle = "New month"
-            static let alertTitle = "Change plan"
-            static let placeholderText = "New plan value"
-            static let confirmationAction = "OK"
-            static let cancelAction = "Cancel"
+            static let countLabelText = "Count".localized
+            static let plusMonthLabelText = "keep it up!".localized
+            static let minusMonthLabelText = "keep an eye on the budget".localized
+            static let buttonTitle = "New month".localized
+            static let alertTitle = "Change plan".localized
+            static let placeholderText = "New plan value".localized
+            static let confirmationAction = "OK".localized
+            static let cancelAction = "Cancel".localized
         }
         enum Sizes {
             static let bigText: CGFloat = 50

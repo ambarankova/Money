@@ -84,10 +84,8 @@ final class CurrencyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        dollarLabel.text = viewModel?.dollarPrice
-        euroLabel.text = viewModel?.euroPrice
         
+        setupLabels()
         setupUI()
     }
 }
@@ -132,15 +130,20 @@ private extension CurrencyViewController {
             make.leading.trailing.equalToSuperview()
         }
     }
+    
+    func setupLabels() {
+        dollarLabel.text = viewModel?.dollarPrice
+        euroLabel.text = viewModel?.euroPrice
+    }
 }
 
 // MARK: - UI constants
 private extension CurrencyViewController {
     enum Constants {
         enum Texts {
-            static let rubles = "rubles"
-            static let dollarText = "today 1 dollar costs"
-            static let euroText = "today 1 euro costs"
+            static let rubles = "rubles".localized
+            static let dollarText = "today 1 dollar costs".localized
+            static let euroText = "today 1 euro costs".localized
         }
         enum Sizes {
         }

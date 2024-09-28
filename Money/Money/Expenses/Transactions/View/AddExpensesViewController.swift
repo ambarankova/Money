@@ -65,8 +65,6 @@ private extension AddExpensesViewController {
         
         let expense = TransactionObject(category: category, date: date, plan: amount, fact: amount)
         
-        NotificationCenter.default.post(name: NSNotification.Name("Update"), object: nil)
-        
         delegate?.didAddExpense(expense)
         dismiss(animated: true, completion: nil)
     }
@@ -165,9 +163,9 @@ extension AddExpensesViewController: UIPickerViewDelegate, UIPickerViewDataSourc
 private extension AddExpensesViewController {
     enum Constants {
         enum Texts {
-            static let saveButtonText = "Save"
-            static let selectText = "Select category"
-            static let amountText = "Amount"
+            static let saveButtonText = "Save".localized
+            static let selectText = "Select category".localized
+            static let amountText = "Amount".localized
         }
         enum Sizes {
             static let buttonText: CGFloat = 17

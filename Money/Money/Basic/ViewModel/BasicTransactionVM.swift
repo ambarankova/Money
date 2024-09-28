@@ -64,7 +64,7 @@ class BasicTransactionVM: TransactionViewModelProtocol {
 private extension BasicTransactionVM {
     enum Constants {
         enum Texts {
-            static let category = "Category"
+            static let category = "Category".localized
         }
         enum Sizes {
         }

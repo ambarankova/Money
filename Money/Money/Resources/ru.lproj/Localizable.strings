@@ -1,0 +1,38 @@
+/* 
+  Localizable.strings
+  Money
+
+  Created by Анастасия Ахановская on 28.09.2024.
+  
+*/
+
+"Transport" = "Транспорт";
+"Beauty" = "Красота";
+"Food" = "Еда";
+"Health" = "Здоровье";
+"Work" = "Работа";
+"Commission" = "Комиссии";
+"Rent" = "Аренда";
+"Count" = "Счет";
+"keep it up!" = "так держать!";
+"keep an eye on the budget" = "следи за бюджетом";
+"New month" = "Новый месяц";
+"Change plan" = "Изменить план";
+"New plan value" = "Новое плановое значение";
+"OK" = "ОК";
+"Cancel" = "Отмена";
+"Plan" = "План";
+"Fact" = "Факт";
+"Transactions" = "Транзакции";
+"Category" = "Категория";
+"Total" = "Итого";
+"rubles" = "рублей";
+"today 1 dollar costs" = "сегодня 1 доллар стоит";
+"today 1 euro costs" = "сегодня 1 евро стоит";
+"Delete" = "Удалить";
+"Save" = "Сохранить";
+"Select category" = "Выбрать категорию";
+"Amount" = "Значение";
+"Currency" = "Курс";
+"Expenses" = "Расходы";
+"Income" = "Доходы";
